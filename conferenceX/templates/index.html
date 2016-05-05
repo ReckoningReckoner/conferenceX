@@ -60,7 +60,7 @@
                     </a>
 
                     <!-- mm hamburger -->
-                    <a href="#" data-activates="mobile"
+                    <a href="/" data-activates="mobile"
                                 class="right button-collapse">
                         <i class="material-icons grey-text text-darken-2">
                             menu
@@ -84,7 +84,7 @@
         <div class="parallax-container valign-wrapper fullscreen">
             <div class="parallax">
                 <img alt="missing img"
-                     src="http://www.bapplecompany.com/uploads/2/9/2/8/29285903/6186485_orig.jpg">
+                     src="{{url_for('static', filename='images/intro.jpeg')}}">
             </div>
             <div class="container valign">
                 <div class="logo">
@@ -106,26 +106,20 @@
         </div>
 
         <!-- about -->
-        <div id="about" class="row">
-            <div class="container">
+        <div id="about" class="row section scrollspy">
+            <div class="container center">
                 <h3 class="grey-text text-darken-2">
                     About
                 </h3>
 
                 <p class="light flow-text">
-                Praesent commodo risus velit, sit amet tincidunt risus
-                pharetra et. Pellentesque in elit magna. Nam scelerisque
-                sem quis orci blandit aliquam. Curabitur et metus tortor.
-                Integer eu eros nisi. Nunc sodales tortor sed justo sollicitudin
-                ullamcorper. Quisque interdum ligula eget elit aliquam, sit amet
-                ultrices mi ultrices. Maecenas ultrices odio lorem, id imperdiet
-                enim vestibulum at.
+                {{data["about"]}}
                 </p>
             </div>
         </div>
 
-        <div id="program">
-            <div class="container">
+        <div id="program" class="row section scrollspy">
+            <div class="container center">
 
                 <h3 class="grey-text text-darken-2">
                     Program
@@ -133,17 +127,22 @@
 
                 <div class="row">
                     <div class="col s12 m7">
-                        <h5> Featured speakers </h5><hr>
+                        <h5 class="grey-text"> Featured speakers <hr></h5>
                         {% for person in data["persons"]  %}
-                        <div class="col s6 center">
+                        <div class="col s6">
                             <div id="person-1" class="card no-margin">
                                 <div class="card-image waves-effect waves-block">
-                                    <img alt="" class="activator" 
-                                    src={{person["url"]}}>
+                                    <img alt="{{person["name"]}}"
+                                         class="activator"
+                                         src={{person["url"]}}>
                                 </div>
 
-                                <span class="activator card-title">
+                                <div class="activator card-title">
                                     {{person["name"]}}
+                                </div>
+
+                                <span class="activator card-content">
+                                    {{person["school"]}}
                                 </span>
 
                                 <div class="card-reveal">
@@ -159,9 +158,9 @@
                         {% endfor %}
                     </div>
 
-                    <div class="col s12 m5">
-                        <h5> Schedule </h5><hr>
-                        <table class="row striped centered">
+                    <div class="col s12 m5 center">
+                        <h5 class="grey-text"> Schedule <hr></h5>
+                        <table class="highlight centered">
                             {{data["table"]|safe}}
                         </table>
                     </div>
@@ -171,12 +170,12 @@
         </div>
 
         <!-- location -->
-        <div id="location" class="row">
+        <div id="location" class="row section scrollspy">
 
-            <div class="parallax-container valign-wrapper" style="height:30%;">
+            <div class="parallax-container valign-wrapper" style="height:40%;">
                 <div class="parallax">
                     <img alt="missing img"
-                         src="{{url_for('static', filename='images/location.jpg')}}">
+                         src="{{url_for('static', filename='images/location.jpeg')}}">
                 </div>
                 <div class="container valign">
                     <div class="center white-text shadowtext">
@@ -186,7 +185,7 @@
             </div> <br>
 
 
-            <div class="container">
+            <div class="center container">
                 <div class="row">
                     <div class="col s12 m6">
                         {{data["location"]|safe}}
@@ -203,7 +202,7 @@
         <!-- program -->
 
         <!-- footer -->
-        <footer class="page-footer grey lighten-5">
+        <footer class="page-footer grey lighten-2">
             <div class="container">
                 <div class="row">
                     <div class="col l6 s12">

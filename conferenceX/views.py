@@ -15,6 +15,7 @@ def add_people(data):
            "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg",
            "id": "person1",
            "name": "Ya Bish",
+           "school": "Mom Fraser SS",
            "description": desc}
           )
 
@@ -23,6 +24,7 @@ def add_people(data):
            "https://s3.amazonaws.com/uifaces/faces/twitter/dustin/128.jpg",
            "id": "person2",
            "name": "Rel Y. High",
+           "school": "Butt University",
            "description": desc}
           )
 
@@ -32,14 +34,17 @@ def add_people(data):
            "128.jpg",
            "id": "person3",
            "name": "N. Olips",
+           "school": "U of C",
            "description": desc}
           )
 
     data["persons"].append(
           {"url":
-           "http://cdn2.blog-media.zillowstatic.com/8/Chris-Morrison-Facebook-c7ea82-300x300.jpg",
+           "http://cdn2.blog-media.zillowstatic.com/8/" +
+           "Chris-Morrison-Facebook-c7ea82-300x300.jpg",
            "id": "person4",
            "name": "No Treal",
+           "school": "Unemployed",
            "description": desc}
           )
 
@@ -85,16 +90,30 @@ def add_table(data):
 
 def add_location(data):
     data["location"] = """
-                       <h5> Address </h5>
+                       <h5 class="grey-text"> Address </h5>
                        <hr>
                        <p class="flow-text">
                            2265 Erin Centre Blvd, Mississauga ON
                        </p>
 
-                       <h5> Date and time</h5>
+                       <h5 class="grey-text"> Date and time</h5>
                        <hr>
                        <p class="flow-text">June 1 2016 from 3 pm to 7 pm</p>
                        """
+
+
+def add_about(data):
+    data["about"] = """
+                    Praesent commodo risus velit, sit amet tincidunt risus
+                    pharetra et. Pellentesque in elit magna. Nam scelerisque
+                    sem quis orci blandit aliquam. Curabitur et metus tortor.
+                    Integer eu eros nisi. Nunc sodales tortor sed
+                    justo sollicitudin
+                    ullamcorper. Quisque interdum ligula eget elit aliquam,
+                    sit amet
+                    ultrices mi ultrices. Maecenas ultrices odio lorem, id
+                    imperdiet
+                    enim vestibulum at."""
 
 
 def google_maps(data):
@@ -108,5 +127,6 @@ def index():
     add_table(data)
     add_location(data)
     google_maps(data)
+    add_about(data)
 
     return render_template("index.html", data=data)
