@@ -1,34 +1,54 @@
-<!DOCTYPE html>
+{% macro list_of_links() %}
+    <li>
+        <a href="#about" class="grey-text text-darken-2">
+            About
+        </a>
+    </li>
+    <li>
+        <a href="#program" class="grey-text text-darken-2">
+            Program
+        </a>
+    </li>
+    <li>
+        <a href="#location" class="grey-text text-darken-2">
+            Location
+        </a>
+    </li>
+    <li>
+        <a href="#" class="grey-text text-darken-2">
+            Register
+        </a>
+    </li>
+    <li>
+        <a href="#" class="grey-text text-darken-2">
+            Get tickets
+        </a>
+    </li>
+    <li>
+        <a href="#" class="grey-text text-darken-2"> FAQ </a>
+    </li>
+{% endmacro %}
+
 <html>
     <head>
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link type="text/css" rel="stylesheet" 
-            href="{{url_for('static', filename='materialize/css/materialize.min.css')}}"  
-            media="screen,projection"/>
-        
-        <link type="text/css" rel="stylesheet" 
-            href="{{url_for('static', filename='conferenceX.css')}}"  
-            media="screen,projection"/>
-
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons"
+              rel="stylesheet">
+        <link type="text/css"
+              rel="stylesheet"
+              href="{{url_for('static',
+                              filename='materialize/css/materialize.min.css')}}"
+    <li>
+        <a href="#program" class="grey-text text-darken-2">
+            Program
+        </a>
+    </li>
+              media="screen,projection"/>
+        <link type="text/css"
+              rel="stylesheet"
+              href="{{url_for('static',
+                              filename='css/index.css')}}"
+              media="screen,projection"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <style>
-            body, html {
-                margin:0;
-                height:100%;
-            }
-
-            .shadowtext{
-                text-shadow: 0px 4px 12px #424242;
-            }
-
-            .nav-wrapper {
-                height:10%;
-            }
-
-            .parallax-fullscreen {
-                height:90%;
-            }
-        </style>
     </head>
 
     <body>
@@ -37,80 +57,38 @@
             <div class="nav-wrapper grey lighten-5">
 
                 <div class="container">
-                  <!-- logo text -->
-                  <a href="{{url_for('index')}}" 
-                      class="brand-logo left grey-text text-darken-2">
-                      ConferenceX 
-                  </a>
+                    <!-- logo text -->
+                    <a href="{{url_for('index')}}"
+                       class="brand-logo left grey-text text-darken-2">
+                        Conference<sup>x</sup>
+                    </a>
 
-                  <!-- mm hamburger -->
-                  <a href="#" data-activates="mobile" 
-                      class="right button-collapse">
-                      <i class="material-icons grey-text text-darken-2">
-                          menu
-                      </i>
-                  </a>
-                  
+                    <!-- mm hamburger -->
+                    <a href="#" data-activates="mobile"
+                                class="right button-collapse">
+                        <i class="material-icons grey-text text-darken-2">
+                            menu
+                        </i>
+                    </a>
 
-                  <!-- navbar large -->
-                  <ul id="nav-mobile" class="right hide-on-med-and-down">
-                      <li>
-                          <a href="#" class="grey-text text-darken-2">About </a>
-                      </li>
-                      <li>
-                          <a href="#" class="grey-text text-darken-2">
-                              Schedule
-                          </a>
-                      </li>
-                      <li>
-                          <a href="#" class="grey-text text-darken-2">
-                              Register as a speaker
-                          </a>
-                      </li>
-                      <li>
-                          <a href="#" class="grey-text text-darken-2">
-                              Get tickets
-                          </a>
-                      </li>
-                      <li>
-                          <a href="#" class="grey-text text-darken-2"> FAQ </a>
-                      </li>
-                  </ul>
+                    <!-- navbar hamburger -->
+                    <ul class="side-nav" id="mobile">
+                        {{ list_of_links()}}
+                    </ul>
 
-                  <!-- navbar hamburger -->
-                  <ul class="side-nav" id="mobile">
-                      <li>
-                          <a href="#" class="grey-text text-darken-2">About </a>
-                      </li>
-                      <li>
-                          <a href="#" class="grey-text text-darken-2">
-                              Schedule
-                          </a>
-                      </li>
-                      <li>
-                          <a href="#" class="grey-text text-darken-2">
-                              Register as a speaker
-                          </a>
-                      </li>
-                      <li>
-                          <a href="#" class="grey-text text-darken-2">
-                              Get tickets
-                          </a>
-                      </li>
-                      <li>
-                          <a href="#" class="grey-text text-darken-2"> FAQ </a>
-                      </li>
-                  </ul>
-
+                    <!-- navbar large -->
+                    <ul id="large" class="right hide-on-med-and-down">
+                        {{ list_of_links() }}
+                    </ul>
                 </div>
             </div>
         </nav>
 
         <!-- intro thingie -->
-        <div class="parallax-container valign-wrapper parallax-fullscreen"> 
+        <div class="parallax-container valign-wrapper fullscreen">
             <div class="parallax">
-                <img alt="missing img" 
-                    src="http://www.bapplecompany.com/uploads/2/9/2/8/29285903/6186485_orig.jpg">
+                <img alt="missing img"
+                     src="http://www.bapplecompany.com/uploads/2/9/2/8/29285903/6186485_orig.jpg">
             </div>
             <div class="container valign">
                 <div class="logo">
@@ -120,23 +98,22 @@
 
                     <div class="shadowtext row center col s12 m6 offset-m2">
                         <h5 class="shadowtext condensed light white-text">
-                            Sit ei nostro fabellas, vix tation habemus 
-                            adversarium no,
-                            ius possit numquam perfecto in.
+                            June 1 2016 @ JFSS
                         </h5>
                     </div>
                 </div>
 
                 <div class="center row">
-                    <a class="btn-large waves-effect blue"> get tickets </a> 
+                    <a class="btn-large waves-effect blue"> get tickets </a>
                 </div>
             </div>
         </div>
 
-        <div class="row about">
+        <!-- about -->
+        <div id="about" class="row">
             <div class="container">
                 <h3 class="grey-text text-darken-2">
-                    About 
+                    About
                 </h3>
 
                 <p class="light flow-text">
@@ -151,54 +128,101 @@
             </div>
         </div>
 
-        <!-- <div class="container"> -->
-        <!--     <div class="row about"> -->
-        <!--         <h3 class="grey-text text-darken-2"> -->
-        <!--             About --> 
-        <!--         </h3> -->
+        <div id="program">
+            <div class="container">
 
-        <!--         <p class="light flow-text"> -->
-        <!--         Praesent commodo risus velit, sit amet tincidunt risus -->
-        <!--         pharetra et. Pellentesque in elit magna. Nam scelerisque -->
-        <!--         sem quis orci blandit aliquam. Curabitur et metus tortor. -->
-        <!--         Integer eu eros nisi. Nunc sodales tortor sed justo sollicitudin -->
-        <!--         ullamcorper. Quisque interdum ligula eget elit aliquam, sit amet -->
-        <!--         ultrices mi ultrices. Maecenas ultrices odio lorem, id imperdiet -->
-        <!--         enim vestibulum at. -->
-        <!--         </p> -->
-        <!--     </div> -->
-        <!-- </div> -->
+                <h3 class="grey-text text-darken-2">
+                    Program
+                </h3>
+
+                <div class="row">
+                    <div class="col s12 m7">
+                        <h5> Featured speakers </h5><hr>
+                        {% for person in data["persons"]  %}
+                        <div class="col s6 center">
+                            <div id="person-1" class="card no-margin">
+                                <div class="card-image waves-effect waves-block">
+                                    <img alt="" class="activator" 
+                                    src={{person["url"]}}>
+                                </div>
+
+                                <span class="activator card-title">
+                                    {{person["name"]}}
+                                </span>
+
+                                <div class="card-reveal">
+                                    <div class="card-title">
+                                        <i class="material-icons right">close</i>
+                                    </div>
+                                    <p>
+                                    {{person["description"]}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="col s12 m5">
+                        <h5> Schedule </h5><hr>
+                        <table class="row striped centered">
+                            {{data["table"]|safe}}
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- location -->
+        <div id="location" class="row">
+
+            <div class="parallax-container valign-wrapper" style="height:30%;">
+                <div class="parallax">
+                    <img alt="missing img"
+                         src="{{url_for('static', filename='images/location.jpg')}}">
+                </div>
+                <div class="container valign">
+                    <div class="center white-text shadowtext">
+                        <h3 class="bold">Location</h3>
+                    </div>
+                </div>
+            </div> <br>
+
+
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m6">
+                        {{data["location"]|safe}}
+                    </div>
+
+                    <div id="google-maps" class="col s12 m6">
+                       {{data["google_maps"]|safe}}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- program -->
+
+        <!-- footer -->
         <footer class="page-footer grey lighten-5">
             <div class="container">
                 <div class="row">
                     <div class="col l6 s12">
                         <h5 class="grey-text text-darken-2">Talk to us</h5>
 
-                        <a href="mailto:conferencexofficial@gmail.com" 
-                            class="grey-text text-darken-2">
+                        <a href="mailto:conferencexofficial@gmail.com"
+                           class="grey-text text-darken-2">
                             conferencexofficial@gmail.com
                         </a>
 
                     </div>
                     <div class="col l4 offset-l2 s12">
                         <h5 class="grey-text text-darken-2">Links</h5>
-                        <ul> 
-                            <li>
-                                <a href="#" class="grey-text text-darken-2">
-                                    About
-                                </a></li>
-                            <li>
-                                <a href="#" class="grey-text text-darken-2">
-                                    Schedule</a></li>
-                            <li>
-                                <a href="#" class="grey-text text-darken-2">
-                                    Register as a speaker</a></li>
-                            <li>
-                                <a href="#" class="grey-text text-darken-2">
-                                    Get tickets</a></li>
-                            <li>
-                                <a href="#" class="grey-text text-darken-2">
-                                    FAQ</a></li>
+                        <ul>
+                            {{list_of_links()}}
                         </ul>
                     </div>
                 </div>
@@ -211,26 +235,21 @@
             </div>
         </footer>
 
+        <!-- scripts -->
         <script type="text/javascript"
-        src="https://code.jquery.com/jquery-2.1.1.min.js">
+                src="https://code.jquery.com/jquery-2.1.1.min.js">
         </script>
 
         <script type="text/javascript"
-        src="{{url_for('static',
-                       filename='materialize/js/materialize.min.js'
-                       )}}">
+                src="{{url_for('static',
+                filename='materialize/js/materialize.min.js'
+                )}}">
         </script>
 
-        <script>
-            $(document).ready(function(){
-              $('.parallax').parallax();
-            });
+        <script type="text/javascript"
+                src="{{url_for('static',
+                filename='js/index.js'
+                )}}">
         </script>
-        <script>
-        $(".button-collapse").sideNav({
-            edge: 'right', // Choose the horizontal origin
-        });
-        </script>
-        
     </body>
 </html>
