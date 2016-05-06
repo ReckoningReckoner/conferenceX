@@ -11,3 +11,7 @@ body {
 .fullscreen {
     height:90%;
 }
+
+.shadowtext {
+   text-shadow: 0px 2px 2px #000000; 
+}

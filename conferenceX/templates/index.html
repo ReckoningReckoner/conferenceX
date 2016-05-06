@@ -5,11 +5,6 @@
         </a>
     </li>
     <li>
-        <a href="#program" class="grey-text text-darken-2">
-            Program
-        </a>
-    </li>
-    <li>
         <a href="#location" class="grey-text text-darken-2">
             Location
         </a>
@@ -56,7 +51,7 @@
                     <!-- logo text -->
                     <a href="{{url_for('index')}}"
                        class="brand-logo left grey-text text-darken-2">
-                        Conference<sup>x</sup>
+                        {{data["title"] | safe}} 
                     </a>
 
                     <!-- mm hamburger -->
@@ -88,12 +83,12 @@
             </div>
             <div class="container valign">
                 <div class="logo">
-                    <div class="title center white-text shadowtext">
-                        <h1 class="bold">Conference<sup>x</sup></h1>
+                    <div class="title center white-text ">
+                        <h1 class="bold">{{data["title"] | safe }}</h1>
                     </div>
 
-                    <div class="shadowtext row center col s12 m6 offset-m2">
-                        <h5 class="shadowtext condensed light white-text">
+                    <div class="row center col s12 m6 offset-m2">
+                        <h5 class="condensed light white-text">
                             June 1 2016 @ JFSS
                         </h5>
                     </div>
@@ -118,6 +113,8 @@
             </div>
         </div>
 
+        {% if data["show_program"] %}
+        <!-- program -->
         <div id="program" class="row section scrollspy">
             <div class="container center">
 
@@ -126,24 +123,16 @@
                 </h3>
 
                 <div class="row">
-                    <div class="col s12 m7">
+                    <div class="col s12 m7 hover-hightlight">
                         <h5 class="grey-text"> Featured speakers <hr></h5>
                         {% for person in data["persons"]  %}
                         <div class="col s6">
-                            <div id="person-1" class="card no-margin">
+                            <div id="person-1" class="card no-margin z-depth-0">
                                 <div class="card-image waves-effect waves-block">
                                     <img alt="{{person["name"]}}"
                                          class="activator"
                                          src={{person["url"]}}>
                                 </div>
-
-                                <div class="activator card-title">
-                                    {{person["name"]}}
-                                </div>
-
-                                <span class="activator card-content">
-                                    {{person["school"]}}
-                                </span>
 
                                 <div class="card-reveal">
                                     <div class="card-title">
@@ -153,7 +142,10 @@
                                     {{person["description"]}}
                                     </p>
                                 </div>
+
                             </div>
+                            <h5> {{person["name"]}} </h5>
+                            <p> {{person["school"]}} </p>
                         </div>
                         {% endfor %}
                     </div>
@@ -168,6 +160,7 @@
 
             </div>
         </div>
+        {% endif %}
 
         <!-- location -->
         <div id="location" class="row section scrollspy">
@@ -178,7 +171,7 @@
                          src="{{url_for('static', filename='images/location.jpeg')}}">
                 </div>
                 <div class="container valign">
-                    <div class="center white-text shadowtext">
+                    <div class="center white-text">
                         <h3 class="bold">Location</h3>
                     </div>
                 </div>
@@ -186,20 +179,24 @@
 
 
             <div class="center container">
-                <div class="row">
-                    <div class="col s12 m6">
-                        {{data["location"]|safe}}
-                    </div>
 
-                    <div id="google-maps" class="col s12 m6">
-                       {{data["google_maps"]|safe}}
-                    </div>
+            {% if data["show_location"] %}
+            <div class="row">
+                <div class="col s12 m6">
+                    {{data["location"]|safe}}
                 </div>
+
+                <div id="google-maps" class="col s12 m6">
+                   {{data["google_maps"]|safe}}
+                </div>
+            </div>
+            {% else %}
+                <h2> TBA </h2>
+            {% endif %}
 
             </div>
         </div>
 
-        <!-- program -->
 
         <!-- footer -->
         <footer class="page-footer grey lighten-2">
@@ -225,7 +222,7 @@
 
             <div class="footer-copyright">
                 <div class="container grey-text text-darken-2">
-                    2016 Conference <sup> x </sup>
+                    2016 {{data["title"] | safe}}
                 </div>
             </div>
         </footer>
