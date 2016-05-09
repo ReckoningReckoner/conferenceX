@@ -74,18 +74,6 @@ def add_table():
                     <td>4:00</td>
                     <td>Lollipop</td>
                 </tr>
-                <tr>
-                    <td>4:00</td>
-                    <td>Lollipop</td>
-                </tr>
-                <tr>
-                    <td>4:00</td>
-                    <td>Lollipop</td>
-                </tr>
-                <tr>
-                    <td>4:00</td>
-                    <td>Lollipop</td>
-                </tr>
             </tbody>
             """
 

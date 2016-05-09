@@ -51,7 +51,7 @@
                     <!-- logo text -->
                     <a href="{{url_for('index')}}"
                        class="brand-logo left grey-text text-darken-2">
-                        {{data["title"] | safe}} 
+                        {{data["title"] | safe}}
                     </a>
 
                     <!-- mm hamburger -->
@@ -75,7 +75,7 @@
             </div>
         </nav>
 
-        <!-- intro thingie -->
+        <!-- intro -->
         <div class="parallax-container valign-wrapper fullscreen">
             <div class="parallax">
                 <img alt="missing img"
@@ -84,11 +84,13 @@
             <div class="container valign">
                 <div class="logo">
                     <div class="title center white-text ">
-                        <h1 class="bold">{{data["title"] | safe }}</h1>
+                        <h1 class="shadowtext bold">
+                            {{data["title"] | safe }}
+                        </h1>
                     </div>
 
                     <div class="row center col s12 m6 offset-m2">
-                        <h5 class="condensed light white-text">
+                        <h5 class="shadowtext white-text">
                             June 1 2016 @ JFSS
                         </h5>
                     </div>
@@ -123,34 +125,24 @@
                 </h3>
 
                 <div class="row">
-                    <div class="col s12 m7 hover-hightlight">
+                    <div class="col s12 hover-hightlight">
+
                         <h5 class="grey-text"> Featured speakers <hr></h5>
                         {% for person in data["persons"]  %}
-                        <div class="col s6">
-                            <div id="person-1" class="card no-margin z-depth-0">
-                                <div class="card-image waves-effect waves-block">
+                        <div class="col s6 m3">
                                     <img alt="{{person["name"]}}"
-                                         class="activator"
-                                         src={{person["url"]}}>
-                                </div>
-
-                                <div class="card-reveal">
-                                    <div class="card-title">
-                                        <i class="material-icons right">close</i>
-                                    </div>
-                                    <p>
-                                    {{person["description"]}}
-                                    </p>
-                                </div>
-
-                            </div>
+                                         class="circle featured-image"
+                                         src={{person["url"]}} >
                             <h5> {{person["name"]}} </h5>
                             <p> {{person["school"]}} </p>
+                            <p> {{person["description"]}}
                         </div>
                         {% endfor %}
                     </div>
+                </div>
 
-                    <div class="col s12 m5 center">
+                <div class="row">
+                    <div class="col s12 center">
                         <h5 class="grey-text"> Schedule <hr></h5>
                         <table class="highlight centered">
                             {{data["table"]|safe}}

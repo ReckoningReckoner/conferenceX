@@ -9,9 +9,22 @@ body {
 }
 
 .fullscreen {
-    height:90%;
+    height:91%;
 }
 
 .shadowtext {
    text-shadow: 0px 2px 2px #000000; 
+}
+
+.featured-image{
+    zoom: 2;
+
+    display: block;
+    margin: auto;
+
+    height: auto;
+    max-height: 100%;
+
+    width: auto;
+    max-width: 100%
 }
