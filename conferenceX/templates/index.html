@@ -1,63 +1,69 @@
 {% macro list_of_links() %}
-    <li>
-        <a href="#about" class="grey-text text-darken-2">
-            About
-        </a>
-    </li>
-    <li>
-        <a href="#location" class="grey-text text-darken-2">
-            Location
-        </a>
-    </li>
-    <li>
-        <a href="#" class="grey-text text-darken-2">
-            Register
-        </a>
-    </li>
-    <li>
-        <a href="#" class="grey-text text-darken-2">
-            Get tickets
-        </a>
-    </li>
-    <li>
-        <a href="#" class="grey-text text-darken-2"> FAQ </a>
-    </li>
+<li>
+    <a href="#about">
+        About
+    </a>
+</li>
+<li>
+    <a href="#location">
+        Location
+    </a>
+</li>
+<li>
+    <a href="#tickets">
+        Get tickets
+    </a>
+</li>
+<li>
+    <a href="#faq">
+        FAQ
+    </a>
+</li>
+<li>
+    <a href="#apply">
+        Apply as a speaker
+    </a>
+</li>
+<li>
+    <a href="#contact">
+        Contact Us
+    </a>
+</li>
+{% endmacro %}
+
+{% macro parallax_mini(img, title) -%}
+    <div class="parallax-container valign-wrapper mini-parallax">
+        <div class="parallax">
+            <img alt="missing img"
+                 src="{{img}}">
+        </div>
+        <div class="container valign">
+            <div class="center white-text">
+                <h3 class="bold">{{title}}</h3>
+            </div>
+        </div>
+    </div> <br>
 {% endmacro %}
 
 <html>
     <head>
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons"
-              rel="stylesheet">
-        <link type="text/css"
-              rel="stylesheet"
-              href="{{url_for('static',
-                      filename='materialize/css/materialize.min.css')}}"
-              media="screen,projection"/>
-
-        <link type="text/css"
-              rel="stylesheet"
-              href="{{url_for('static',
-                      filename='css/index.css')}}"
-              media="screen,projection"/>
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='materialize/css/materialize.min.css')}}" media="screen,projection"/> 
+        <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}" media="screen,projection"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
 
     <body>
         <!-- navbar -->
-        <nav>
-            <div class="nav-wrapper grey lighten-5">
+        <nav id="navbar"
+             class="grey darken-4 navbar-fixed">
+            <div class="nav-wrapper">
 
                 <div class="container">
-                    <!-- logo text -->
-                    <a href="{{url_for('index')}}"
-                       class="brand-logo left grey-text text-darken-2">
-                        {{data["title"] | safe}}
-                    </a>
-
                     <!-- mm hamburger -->
                     <a href="/" data-activates="mobile"
                                 class="right button-collapse">
-                        <i class="material-icons grey-text text-darken-2">
+                        <i class="material-icons">
                             menu
                         </i>
                     </a>
@@ -82,22 +88,23 @@
                      src="{{url_for('static', filename='images/intro.jpeg')}}">
             </div>
             <div class="container valign">
-                <div class="logo">
-                    <div class="title center white-text ">
-                        <h1 class="shadowtext bold">
-                            {{data["title"] | safe }}
-                        </h1>
-                    </div>
+                <div class="title center white-text shadowtext">
+                    <h1 class="bold">
+                        {{data["title"] | safe }}
+                    </h1>
+                </div>
 
-                    <div class="row center col s12 m6 offset-m2">
-                        <h5 class="shadowtext white-text">
-                            June 1 2016 @ JFSS
-                        </h5>
-                    </div>
+                <div class="row center col s12 m6 offset-m2">
+                    <h5 class="white-text shadowtext">
+                        {{data["subtitle"] | safe }}
+                    </h5>
                 </div>
 
                 <div class="center row">
-                    <a class="btn-large waves-effect blue"> get tickets </a>
+                    <a class="btn-large waves-effect grey darken-4"
+                        href="#tickets">
+                        get tickets
+                    </a>
                 </div>
             </div>
         </div>
@@ -113,82 +120,160 @@
                 {{data["about"]}}
                 </p>
             </div>
-        </div>
 
-        {% if data["show_program"] %}
-        <!-- program -->
-        <div id="program" class="row section scrollspy">
-            <div class="container center">
+            {% if data["show_program"] %}
+            <!-- program -->
+            <div id="program" class="row section scrollspy">
+                <div class="container center">
 
-                <h3 class="grey-text text-darken-2">
-                    Program
-                </h3>
+                    <h3 class="grey-text text-darken-2">
+                        Program
+                    </h3>
 
-                <div class="row">
-                    <div class="col s12 hover-hightlight">
+                    <div class="row">
+                        <div class="col s12 hover-hightlight">
 
-                        <h5 class="grey-text"> Featured speakers <hr></h5>
-                        {% for person in data["persons"]  %}
-                        <div class="col s6 m3">
-                                    <img alt="{{person["name"]}}"
-                                         class="circle featured-image"
-                                         src={{person["url"]}} >
-                            <h5> {{person["name"]}} </h5>
-                            <p> {{person["school"]}} </p>
-                            <p> {{person["description"]}}
+                            <h5 class="grey-text"> Featured speakers</h5><hr>
+                            {% for person in data["persons"]  %}
+                            <div class="col s6 m3">
+                                        <img alt="{{person["name"]}}"
+                                             class="circle featured-image"
+                                             src={{person["url"]}} >
+                                <h5> {{person["name"]}} </h5>
+                                <p> {{person["school"]}} </p>
+                                <p> {{person["description"]}} </p>
+                            </div>
+                            {% endfor %}
                         </div>
-                        {% endfor %}
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="col s12 center">
-                        <h5 class="grey-text"> Schedule <hr></h5>
-                        <table class="highlight centered">
-                            {{data["table"]|safe}}
-                        </table>
+                    <div class="row">
+                        <div class="col s12 center">
+                            <h5 class="grey-text"> Schedule </h5><hr>
+                            <table class="highlight centered">
+                                {{data["table"]|safe}}
+                            </table>
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
+            {% endif %}
         </div>
-        {% endif %}
+
 
         <!-- location -->
         <div id="location" class="row section scrollspy">
-
-            <div class="parallax-container valign-wrapper" style="height:40%;">
-                <div class="parallax">
-                    <img alt="missing img"
-                         src="{{url_for('static', filename='images/location.jpeg')}}">
-                </div>
-                <div class="container valign">
-                    <div class="center white-text">
-                        <h3 class="bold">Location</h3>
-                    </div>
-                </div>
-            </div> <br>
-
+            {{ 
+            parallax_mini('https://images.unsplash.com/photo-1458708606976'+
+                          '-4af51a03c931?crop=entropy&fit=crop&fm=jpg&h=675'+
+                          '&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1375',
+                          'Location')
+            }}
 
             <div class="center container">
+                {% if data["show_location"] %}
+                    <div class="row">
+                        <div class="col s12 m6">
+                            {{data["location"]|safe}}
+                        </div>
 
-            {% if data["show_location"] %}
-            <div class="row">
-                <div class="col s12 m6">
-                    {{data["location"]|safe}}
-                </div>
-
-                <div id="google-maps" class="col s12 m6">
-                   {{data["google_maps"]|safe}}
-                </div>
-            </div>
-            {% else %}
-                <h2> TBA </h2>
-            {% endif %}
-
+                        <div id="google-maps" class="col s12 m6">
+                           {{data["google_maps"]|safe}}
+                        </div>
+                    </div>
+                {% else %}
+                    <h2> TBA </h2>
+                {% endif %}
             </div>
         </div>
 
+
+        <!-- tickets -->
+        <div id="tickets" class="row section scrollspy">
+
+            {{ 
+            parallax_mini('https://images.unsplash.com/photo-1421987392252-38a07781c07e?crop=entropy&fit=crop&fm=jpg&h=675&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1375',
+                          'Get tickets')
+            }}
+            
+            <div class="center container">
+                <div class="row">
+                    <p class="flow-text"> Tickets are priced at </p>
+
+                    {% for price in data['prices'] %}
+                        <div class="col s6 m{{ 12//(data['prices']|length) }}">
+                            <h5 class="grey-text text-darken-2">
+                                {{price['name']}}
+                            </h5>
+                            <h4>
+                                {{price['price']}}
+                            </h4>
+                            <p class="grey-text text-darken-2">
+                                {{price['description']}}
+                            </p>
+                        </div>
+                    {% endfor %}
+
+                </div>
+                {% if data["show_ticket_button"]%}
+                    <a class="btn-large amber waves-effect"> Buy Now</a>
+                {% else %}
+                    <a class="btn-large disabled"> Tickets coming soon </a>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- faq -->
+        <div id="faq" class="row section scrollspy">
+            {{ 
+            parallax_mini('https://images.unsplash.com/photo-1458040937381-49c067dfd49a?crop=entropy&fit=crop&fm=jpg&h=675&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1375',
+                          'FAQ')
+            }}
+
+            <div class="container">
+                {% for faq in data["faq"] %}
+                <div class="col s12 m6">
+                    <h5> {{faq["question"]}} </h5>
+                    <p> {{faq["answer"]}} </p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- apply -->
+        <div id="apply" class="row section scrollspy">
+            {{ 
+            parallax_mini('https://images.unsplash.com/photo-1446102892025-3900145fd2a7?crop=entropy&fit=crop&fm=jpg&h=675&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1375',
+                          'Apply as a speaker')
+            }}
+
+            <div class="container center">
+                <p class="flow-text">
+                    {{data["apply_text"] | safe}}
+                </p>
+                {% if data["show_speaker_button"]%}
+                    <a class="btn-large amber waves-effect"> Apply as a speaker</a>
+                {% else %}
+                    <a class="btn-large disabled"> Applications are closed </a>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- apply -->
+        <div id="contact" class="center row section scrollspy">
+            <h3 class="grey-text darken-2"> Contact Us</h3>
+
+            <div class="row">
+                <p class="flow-text">
+                    Have any questions, concerns, or ideas? Feel free to
+                    reach out to us at: <br>
+                    <a href="mailto:conferencexofficial@gmail.com">
+                        conferencexofficial@gmail.com
+                    </a>
+                </p>
+            </div>
+        </div>
 
         <!-- footer -->
         <footer class="page-footer grey lighten-2">
