@@ -10,8 +10,6 @@ body {
     position: fixed;
 }
 
-
-
 .fullscreen {
     height:100%;
 }
@@ -34,7 +32,7 @@ body {
 }
 
 .mini-parallax{
-    height: 35%;
+    height: 33%;
 }
 
 .small-text{

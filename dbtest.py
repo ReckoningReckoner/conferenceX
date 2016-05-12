@@ -86,7 +86,7 @@ def add_apply_text():
 
 
 def test_html():
-    return HTML(title="Conference<sup>x</sup>",
+    return HTML(title="Phase Shift",
                 subtitle="June 1 2016 @ Living Arts Centre",
                 show_program=True,
                 show_location=True,

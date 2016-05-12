@@ -1,36 +1,36 @@
 {% extends 'base.html' %}
 
 {% macro list_of_links() %}
-<li>
-    <a href="#about">
-        About
-    </a>
-</li>
-<li>
-    <a href="#location">
-        Location
-    </a>
-</li>
-<li>
-    <a href="#tickets">
-        Get tickets
-    </a>
-</li>
-<li>
-    <a href="#faq">
-        FAQ
-    </a>
-</li>
-<li>
-    <a href="#apply">
-        Apply as a speaker
-    </a>
-</li>
-<li>
-    <a href="#contact">
-        Contact Us
-    </a>
-</li>
+    <li>
+        <a href="#about">
+            About
+        </a>
+    </li>
+    <li>
+        <a href="#location">
+            Location
+        </a>
+    </li>
+    <li>
+        <a href="#tickets">
+            Get tickets
+        </a>
+    </li>
+    <li>
+        <a href="#faq">
+            FAQ
+        </a>
+    </li>
+    <li>
+        <a href="#apply">
+            Apply as a speaker
+        </a>
+    </li>
+    <li>
+        <a href="#contact">
+            Contact Us
+        </a>
+    </li>
 {% endmacro %}
 
 {% macro parallax_mini(img, title) -%}
@@ -48,7 +48,7 @@
 {% endmacro %}
 
 {% block othercss%}
-    <title> ConferenceX </title>
+        <title> {{html.title}} </title>
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}" media="screen,projection"/>
 {% endblock %}
 
@@ -64,8 +64,7 @@
 
             <div class="container">
                 <!-- mm hamburger -->
-                <a href="/" data-activates="mobile"
-                            class="right button-collapse">
+                <a href="/" data-activates="mobile" class="right button-collapse">
                     <i class="material-icons">
                         menu
                     </i>
@@ -91,14 +90,14 @@
                  src="{{url_for('static', filename='images/intro.jpeg')}}">
         </div>
         <div class="container valign">
-            <div class="title center white-text shadowtext">
+            <div class="title center white-text">
                 <h1 class="bold">
                     {{html.title | safe}}
                 </h1>
             </div>
 
             <div class="row center col s12 m6 offset-m2">
-                <h5 class="white-text shadowtext">
+                <h5 class="white-text thin">
                     {{html.subtitle | safe }}
                 </h5>
             </div>
@@ -138,14 +137,14 @@
 
                         <h5 class="grey-text"> Featured speakers</h5><hr>
                         {% for person in persons  %}
-                        <div class="col s6 m3">
-                                    <img alt="{{person["name"]}}"
-                                         class="circle featured-image"
-                                         src={{person["url"]}} >
-                            <h5> {{person["name"]}} </h5>
-                            <p> {{person["school"]}} </p>
-                            <p> {{person["description"]}} </p>
-                        </div>
+                            <div class="col s6 m3">
+                                        <img alt="{{person["name"]}}"
+                                             class="circle featured-image"
+                                             src={{person["url"]}} >
+                                <h5> {{person["name"]}} </h5>
+                                <p> {{person["school"]}} </p>
+                                <p> {{person["description"]}} </p>
+                            </div>
                         {% endfor %}
                     </div>
                 </div>
@@ -167,10 +166,8 @@
 
     <!-- location -->
     <div id="location" class="row section scrollspy">
-        {{ 
-        parallax_mini('https://images.unsplash.com/photo-1458708606976'+
-                      '-4af51a03c931?crop=entropy&fit=crop&fm=jpg&h=675'+
-                      '&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1375',
+        {{
+        parallax_mini(url_for('static', filename="images/location.jpeg"),
                       'Location')
         }}
 
@@ -195,32 +192,24 @@
     <!-- tickets -->
     <div id="tickets" class="row section scrollspy">
 
-        {{ 
-        parallax_mini('https://images.unsplash.com/photo-1421987392252-38a07781c07e?crop=entropy&fit=crop&fm=jpg&h=675&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1375',
+        {{
+        parallax_mini(url_for('static', filename='images/tickets.jpeg'),
                       'Get tickets')
         }}
-        
+
         <div class="center container">
             <div class="row">
                 <p class="flow-text"> Tickets are priced at </p>
-
                 {% for price in prices %}
-                    <div class="col s6 m{{ 12//(prices|length) }}">
-                        <h5 class="grey-text text-darken-2">
-                            {{price['name']}}
-                        </h5>
-                        <h4>
-                            {{price['price']}}
-                        </h4>
-                        <p class="grey-text text-darken-2">
-                            {{price['description']}}
-                        </p>
+                    <div class="col s12 m{{ 12//(prices|length) }}">
+                        <h5 class="grey-text text-darken-2"> {{price['name']}} </h5>
+                        <h4> {{price['price']}} </h4>
+                        <p class="grey-text text-darken-2"> {{price['description']}} </p>
                     </div>
                 {% endfor %}
-
             </div>
             {% if html.show_ticket_button%}
-                <a class="btn-large amber waves-effect waves-light">
+                <a class="btn-large grey darken-4 waves-effect waves-light">
                     Buy Now
                 </a>
             {% else %}
@@ -231,8 +220,8 @@
 
     <!-- faq -->
     <div id="faq" class="row section scrollspy">
-        {{ 
-        parallax_mini('https://images.unsplash.com/photo-1458040937381-49c067dfd49a?crop=entropy&fit=crop&fm=jpg&h=675&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1375',
+        {{
+        parallax_mini(url_for('static', filename='images/faq.jpeg'),
                       'FAQ')
         }}
 
@@ -248,8 +237,8 @@
 
     <!-- apply -->
     <div id="apply" class="row section scrollspy">
-        {{ 
-        parallax_mini('https://images.unsplash.com/photo-1446102892025-3900145fd2a7?crop=entropy&fit=crop&fm=jpg&h=675&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1375',
+        {{
+        parallax_mini(url_for('static', filename='images/apply.jpeg'),
                       'Apply as a speaker')
         }}
 
@@ -258,11 +247,11 @@
                 {{html.apply_text | safe}}
             </p>
             {% if html.show_speaker_button%}
-                <a class="btn-large amber waves-effect waves-light">
+                <a class="btn-large grey darken-4 waves-effect waves-light">
                     Apply as a speaker
                 </a>
             {% else %}
-                <a class="btn-large disabled"> Applications are closed </a>
+                <a class="btn-large disabled"> Applications are not enabled </a>
             {% endif %}
         </div>
     </div>
