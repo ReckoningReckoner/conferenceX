@@ -24,9 +24,9 @@ def login():
             # User is validated
             if user is not None and user.verify(request.form['password']):
                 session['admin'] = True
-                return redirect(url_for('admin'))
-
-            flash("incorrect username or password")
+                return redirect(url_for('admin'))  # log in
+            else:
+                flash("incorrect username or password")
 
     return render_template("login.html")
 
