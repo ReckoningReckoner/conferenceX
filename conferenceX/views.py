@@ -17,18 +17,18 @@ def admin():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    if not session.get('admin'):
+    if not session.get('admin'):  # not logged in
         if request.method == "POST":
             user = User.query.get(request.form['username'])
+
+            # User is validated
             if user is not None and user.verify(request.form['password']):
                 session['admin'] = True
-                redirect(url_for('admin'))
-            else:
-                flash("incorrect username or password")
+                return redirect(url_for('admin'))
 
-        return render_template("login.html")
-    else:
-        return redirect(url_for("admin"))
+            flash("incorrect username or password")
+
+    return render_template("login.html")
 
 
 @app.route("/logout")
