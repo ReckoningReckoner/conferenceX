@@ -1,7 +1,8 @@
 # This module updates the database tables, and adds test values to it
 
 
-from conferenceX.models import db, HTML, Person, Question, Price
+from conferenceX.models import db, HTML, Person, Question, Price, User
+from secrets import HASHED_PW
 
 
 def add_table():
@@ -107,7 +108,7 @@ def test_persons():
 
     persons = []
     persons.append(
-            Person(url="https=//s3.amazonaws.com/" +
+            Person(url="https://s3.amazonaws.com/" +
                    "uifaces/faces/twitter/brynn/128.jpg",
                    id=1,
                    name="Ya Bish",
@@ -124,14 +125,15 @@ def test_persons():
 
     persons.append(
             Person(url="https://s3.amazonaws.com/" +
-                   "uifaces/faces/twitter/connor_gaunt/",
+                   "uifaces/faces/twitter/connor_gaunt/128.jpg",
                    id=3,
                    name="N. Olips",
                    school="U of C",
                    description=desc))
 
     persons.append(
-            Person(url="http://cdn2.blog-media.zillowstatic.com/8/",
+            Person(url="http://cdn2.blog-media.zillowstatic.com/8/" +
+                   "Chris-Morrison-Facebook-c7ea82-300x300.jpg",
                    id=4,
                    name="No Treal",
                    school="Unemployed",
@@ -204,6 +206,11 @@ def insert_test_data():
         if not Price.query.get(price.id):
             print("adding", price)
             db.session.add(price)
+
+    if not User.query.get("root"):
+        print("adding root")
+        user = User(username="root", hashed=HASHED_PW)
+        db.session.add(user)
 
     db.session.commit()
 

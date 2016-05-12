@@ -4,6 +4,7 @@
 
 from flask_sqlalchemy import SQLAlchemy
 from conferenceX import app
+import bcrypt
 try:
     from secrets import DATABASE_URI
 except ImportError:
@@ -65,6 +66,18 @@ class Price(db.Model):
     def __repr__(self):
         return "<Question " + str("self.id") + " " + self.name + ">"
 
+
+class User(db.Model):
+    username = db.Column(db.String(80), primary_key=True)
+    hashed = db.Column(db.String(80))
+
+    def verify(self, attempt):
+        attempt = bytes(attempt, 'utf-8')
+        hashed = bytes(self.hashed, 'utf-8')
+        return hashed == bcrypt.hashpw(attempt, hashed)
+
+    def __repr__(self):
+        return "<User " + self.username + ">"
 
 if __name__ == "__main__":
     db.create_all()

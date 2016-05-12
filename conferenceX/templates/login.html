@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block othercss %}
+    <title> login </title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% for message in get_flashed_messages() %}
+        <h5 class="red-text text-lighten-2"> {{message}} </h5>
+        {%endfor%}
+
+        <h3> Please log in </h3>
+        <form method="post">
+            <div class="username">
+                Username<br>
+                <input type="text" name="username">
+            </div>
+
+            <div class="password">
+                Password<br>
+                <input type="password" name="password">
+            </div>
+
+            <button class="btn-large" value="Submit">Log in </button>
+        </form>
+    </div>
+{% endblock body %}

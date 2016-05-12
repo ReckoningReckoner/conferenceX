@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block othercss %}
+    <title> admin </title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <br>
+        <a class="btn" href="{{url_for('logout')}}"> Log out </a>
+    </div>
+{% endblock body %}
