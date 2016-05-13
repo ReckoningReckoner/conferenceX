@@ -14,6 +14,7 @@ except ImportError:
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
+app.config['SQLALCHEMY_POOL_RECYCLE'] = 299
 db = SQLAlchemy(app)
 
 
