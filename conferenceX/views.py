@@ -11,8 +11,18 @@ app.config["SECRET_KEY"] = SECRET_KEY
 def admin():
     if not session.get('admin'):
         return redirect(url_for("login"))
-    else:
-        return render_template("admin.html")
+
+    if request.method == "GET":
+        html = HTML.query.limit(1).all()[0]
+        prices = Price.query.all()
+        persons = Person.query.all()
+        questions = Question.query.all()
+
+    return render_template("admin.html",
+                           html=html,
+                           prices=prices,
+                           persons=persons,
+                           questions=questions)
 
 
 @app.route("/login", methods=["GET", "POST"])

@@ -4,9 +4,55 @@
     <title> admin </title>
 {% endblock %}
 
+{% macro input(label, value) -%}
+<div class="input-field col s6">
+    <input id="{{label}}" value="{{value}}" type="text">
+    <label for="{{label}}" class="active">
+        {{label}}
+    </label>
+</div>
+{%- endmacro %}
+
+
+{% macro show_price(name="", price="", description="", id="") -%}
+<div class="row" id={{id}}>
+    {{input("name", name)}}
+    {{input("price", price)}}
+    {{input("description", description)}}
+</div>
+{%- endmacro %}
+
+<!-- var hello = '{{show_price()}}'; -->
+{% block script %}
+<script>
+$(document).ready(function() {
+    $(".new-price").click(function() {
+        var price =`{{show_price()}}`;
+        $(".edit-price").append(price);
+    });
+});
+</script>
+{% endblock %}
+
 {% block body %}
     <div class="container">
-        <br>
-        <a class="btn" href="{{url_for('logout')}}"> Log out </a>
+        <br><a class="btn" href={{url_for("logout")}}> Log out </a>
+        
+        <ul class="collapsible" data-collapsible="accordion">
+            <li>
+                <div class="collapsible-header"> Edit Prices </div>
+                <div class="collapsible-body row center">
+                    <div class="col s10 offset-s1 edit-price">
+                        {% for price in prices %}
+                        {{show_price(price.name, price.price, price.description, price.id)}}
+                        {% endfor %}
+                    </div>
+
+                    <button class="btn new-price">New Price</button>
+                </div>
+            </li>
+        </ul>
+
     </div>
+
 {% endblock body %}
