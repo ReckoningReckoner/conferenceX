@@ -213,6 +213,7 @@ def insert_test_data():
         db.session.add(user)
 
     db.session.commit()
+    print("committed to database")
 
 if __name__ == "__main__":
     db.create_all()
