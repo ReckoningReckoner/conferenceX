@@ -1,56 +1,115 @@
 {% extends 'base.html' %}
 
 {% block othercss %}
-    <title> admin </title>
+<title> admin </title>
 {% endblock %}
 
-{% macro input(label, value) -%}
-<div class="input-field col s6">
-    <input id="{{label}}" value="{{value}}" type="text">
-    <label for="{{label}}" class="active">
-        {{label}}
-    </label>
+{% macro fields(column, value, id, table) -%}
+id="{{table}}-{{id}}-{{column}}" table="{{table}}" column="{{column}}" row_id="{{id}}" value="{{value}}"
+{%- endmacro %}
+
+{% macro input(column, value, id, table, label) -%}
+{% if value == True or value == False %}
+    {% if value %}
+        {% set to_check="checked" %}
+    {%endif %}
+    <div class="col s3 switch">
+        <span class="grey-text"> {{label}} </span><br>
+        <label>
+            No
+            <input type="checkbox" class="dynamic-text" {{to_check | safe}}
+            {{fields(column, value, id, table)}}> 
+            <span class="lever"></span>
+            Yes
+        </label>
+    </div>
+{% else %} 
+
+    {% if value | length < 200 %}
+        {% set width = "s6" %}
+        {% set element_type = "input" %}
+        {% set class = "small-text" %}
+    {% else %}
+        {% set width = "s12" %}
+        {% set element_type = "textarea" %}
+        {% set textarea_default = value %}
+        {% set class = "materialize-textarea" %}
+    {% endif %}
+
+    <div class="input-field col s12">
+        <{{element_type|safe}} {{fields(column, value, id, table)}} 
+         class="dynamic-text {{class|safe}}">
+             {{textarea_default}}
+         </{{element_type|safe}}>
+
+        <label for="{{table}}-{{id}}-{{column}}" class="active">
+            {{label}}
+        </label>
+    </div>
+{% endif %}
+{%- endmacro %}
+
+{% macro edit_row(row) -%}
+<div class="row grey lighten-4" table="{{row.__class__.__name__}}" row_id="{{row.id}}">
+    {% if row.__class__.__name__ != "HTML" %}
+       <div class="right red-text text-lighten-2">
+           <a table="{{row.__class__.__name__}}" row_id="{{row.id}}"
+               class="right red-text text-lighten-2 delete-row"
+               style="cursor: hand;">
+                delete row 
+            </a>
+        </div>
+    {% endif %}
+
+    {% for data in row.edit_view() %}
+        {{input(data["column"],
+        data["value"],
+        row.id,
+        row.__class__.__name__,
+        data["label"])}}
+    {% endfor %}
 </div>
 {%- endmacro %}
 
-
-{% macro show_price(name="", price="", description="", id="") -%}
-<div class="row" id={{id}}>
-    {{input("name", name)}}
-    {{input("price", price)}}
-    {{input("description", description)}}
-</div>
+{% macro edit_table(table, title) -%}
+<li>
+    <div class="collapsible-header">
+        {{title}}
+        <i class="material-icons large right"> mode_edit </i>
+    </div>
+    <div class="collapsible-body">
+        <div class="container">
+            {% for row in table %}
+                {{edit_row(row)}}
+            {% endfor %}
+        </div>
+    </div>
+</li>
 {%- endmacro %}
 
-<!-- var hello = '{{show_price()}}'; -->
 {% block script %}
-<script>
-$(document).ready(function() {
-    $(".new-price").click(function() {
-        var price =`{{show_price()}}`;
-        $(".edit-price").append(price);
-    });
-});
-</script>
+<script type="text/javascript" src="{{url_for('static', filename='js/admin.js')}}"> </script>
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-        <br><a class="btn" href={{url_for("logout")}}> Log out </a>
-        
-        <ul class="collapsible" data-collapsible="accordion">
-            <li>
-                <div class="collapsible-header"> Edit Prices </div>
-                <div class="collapsible-body row center">
-                    <div class="col s10 offset-s1 edit-price">
-                        {% for price in prices %}
-                        {{show_price(price.name, price.price, price.description, price.id)}}
-                        {% endfor %}
-                    </div>
+    <div class="container"> 
+        {% for message in get_flashed_messages() %}
+            <h5 class="red-text text-lighten-2"> {{message}} </h5>
+        {%endfor%}
 
-                    <button class="btn new-price">New Price</button>
-                </div>
-            </li>
+        <h5 class="blue-text" style="border-style: dotted;">
+            <i class="material-icons"> info_outline </i>
+            Changes to website are dynamic. Once you're done typing, the changes
+            will automatically apply
+        </h5>
+        <a class="btn" href={{url_for("logout")}}> Log out </a>
+
+
+        <ul class="collapsible" data-collapsible="expandable">
+            {{edit_table(html, "Edit Text")}}
+            {{edit_table(persons, "Edit Featured Speakers")}}
+            {{edit_table(prices, "Edit Prices")}}
+            {{edit_table(questions, "Edit  FAQ")}}
         </ul>
 
     </div>

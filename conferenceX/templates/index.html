@@ -1,36 +1,12 @@
 {% extends 'base.html' %}
 
 {% macro list_of_links() %}
-    <li>
-        <a href="#about">
-            About
-        </a>
-    </li>
-    <li>
-        <a href="#location">
-            Location
-        </a>
-    </li>
-    <li>
-        <a href="#tickets">
-            Get tickets
-        </a>
-    </li>
-    <li>
-        <a href="#faq">
-            FAQ
-        </a>
-    </li>
-    <li>
-        <a href="#apply">
-            Apply as a speaker
-        </a>
-    </li>
-    <li>
-        <a href="#contact">
-            Contact Us
-        </a>
-    </li>
+<li> <a href="#about"> About </a> </li>
+<li> <a href="#location"> Location </a> </li>
+<li> <a href="#tickets"> Get tickets </a> </li>
+<li> <a href="#faq"> FAQ </a> </li>
+<li> <a href="#apply"> Apply as a speaker </a> </li>
+<li> <a href="#contact"> Contact Us </a> </li>
 {% endmacro %}
 
 {% macro parallax_mini(img, title) -%}
@@ -48,7 +24,7 @@
 {% endmacro %}
 
 {% block othercss%}
-        <title> {{html.title}} </title>
+    <title> {{html.title}} </title>
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}" media="screen,projection"/>
 {% endblock %}
 
