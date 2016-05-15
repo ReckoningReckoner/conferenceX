@@ -1,25 +1,13 @@
-from conferenceX import app
+from conferenceX.flask_app import app
 from conferenceX.models import HTML, Person, Question, Price, User, db
-from conferenceX.models import DATABASE_DICT
+from conferenceX.models import get_row_from_dict, get_table_from_str
 from flask import render_template, session, redirect, url_for, request
-from flask import flash
+from flask import flash, abort
 from secrets import SECRET_KEY
 import json
 
 app.config["SECRET_KEY"] = SECRET_KEY
 db.create_all()
-
-
-def get_row_from_dict(row_edit):
-    table = DATABASE_DICT.get(row_edit["table"])
-    if table is None:
-        raise AttributeError("Invalid table name")
-
-    row = table.query.get(row_edit["id"])
-    if row is None:
-        raise AttributeError("Invalid id. Maybe wrong type?")
-
-    return row
 
 
 def update_row(row_edit):
@@ -46,7 +34,6 @@ def admin():
 
     if request.method == "POST":
         if request.json:
-
             try:
                 row_edit = request.json
                 if row_edit.get("delete"):
@@ -60,19 +47,35 @@ def admin():
                 print("committed")
             except AttributeError as e:
                 return json.dumps({'error': str(e)}), 200
+        elif request.form:
+            print("form")
 
             return json.dumps({'status': 'OK'}), 200
-    else:
-        html = HTML.query.limit(1).all()
-        prices = Price.query.all()
-        persons = Person.query.all()
-        questions = Question.query.all()
 
+    html = HTML.query.limit(1).all()
+    prices = Price.query.all()
+    persons = Person.query.all()
+    questions = Question.query.all()
     return render_template("admin.html",
                            html=html,
                            prices=prices,
                            persons=persons,
                            questions=questions)
+
+
+@app.route("/admin/add/<table>")
+def add(table):
+    try:
+        if table == "HTML":
+            raise AttributeError
+
+        new_table = get_table_from_str(table)
+        row = new_table()
+        print(row.edit_view())
+        return render_template("add.html", row=row)
+
+    except AttributeError:
+        abort(403)
 
 
 @app.route("/login", methods=["GET", "POST"])

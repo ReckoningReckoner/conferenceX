@@ -3,7 +3,8 @@
 
 
 from flask_sqlalchemy import SQLAlchemy
-from conferenceX import app
+from conferenceX.flask_app import app
+
 import bcrypt
 try:
     from secrets import DATABASE_URI
@@ -141,10 +142,25 @@ class User(db.Model):
         return "<User " + self.username + ">"
 
 
-DATABASE_DICT = {"HTML": HTML,
-                 "Person": Person,
-                 "Question": Question,
-                 "Price": Price}
+DATABASE_DICT = {"HTML": HTML, "Person": Person,
+                 "Question": Question, "Price": Price}
 
-if __name__ == "__main__":
-    db.create_all()
+
+def get_table_from_str(table):
+    new_table = DATABASE_DICT.get(table)
+    if new_table is None:
+        raise AttributeError("Invalid table name")
+
+    return new_table
+
+
+def get_row_from_dict(row_edit):
+    table = get_table_from_str(row_edit["table"])
+    if table is None:
+        raise AttributeError("Invalid table name")
+
+    row = table.query.get(row_edit["id"])
+    if row is None:
+        raise AttributeError("Invalid id. Maybe wrong type?")
+
+    return row

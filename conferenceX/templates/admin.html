@@ -1,53 +1,9 @@
 {% extends 'base.html' %}
-
+{% from 'dbmacro.html' import display_row %}
 {% block othercss %}
 <title> admin </title>
 {% endblock %}
 
-{% macro fields(column, value, id, table) -%}
-id="{{table}}-{{id}}-{{column}}" table="{{table}}" column="{{column}}" row_id="{{id}}" value="{{value}}"
-{%- endmacro %}
-
-{% macro input(column, value, id, table, label) -%}
-{% if value == True or value == False %}
-    {% if value %}
-        {% set to_check="checked" %}
-    {%endif %}
-    <div class="col s3 switch">
-        <span class="grey-text"> {{label}} </span><br>
-        <label>
-            No
-            <input type="checkbox" class="dynamic-text" {{to_check | safe}}
-            {{fields(column, value, id, table)}}> 
-            <span class="lever"></span>
-            Yes
-        </label>
-    </div>
-{% else %} 
-
-    {% if value | length < 200 %}
-        {% set width = "s6" %}
-        {% set element_type = "input" %}
-        {% set class = "small-text" %}
-    {% else %}
-        {% set width = "s12" %}
-        {% set element_type = "textarea" %}
-        {% set textarea_default = value %}
-        {% set class = "materialize-textarea" %}
-    {% endif %}
-
-    <div class="input-field col s12">
-        <{{element_type|safe}} {{fields(column, value, id, table)}} 
-         class="dynamic-text {{class|safe}}">
-             {{textarea_default}}
-         </{{element_type|safe}}>
-
-        <label for="{{table}}-{{id}}-{{column}}" class="active">
-            {{label}}
-        </label>
-    </div>
-{% endif %}
-{%- endmacro %}
 
 {% macro edit_row(row) -%}
 <div class="row grey lighten-4" table="{{row.__class__.__name__}}" row_id="{{row.id}}">
@@ -60,14 +16,7 @@ id="{{table}}-{{id}}-{{column}}" table="{{table}}" column="{{column}}" row_id="{
             </a>
         </div>
     {% endif %}
-
-    {% for data in row.edit_view() %}
-        {{input(data["column"],
-        data["value"],
-        row.id,
-        row.__class__.__name__,
-        data["label"])}}
-    {% endfor %}
+    {{display_row(row)}}
 </div>
 {%- endmacro %}
 
@@ -82,6 +31,12 @@ id="{{table}}-{{id}}-{{column}}" table="{{table}}" column="{{column}}" row_id="{
             {% for row in table %}
                 {{edit_row(row)}}
             {% endfor %}
+
+            {% if table[0].__class__.__name__ != "HTML" %}
+                <a class="btn" href="{{url_for('add', table=table[0].__class__.__name__)}}">
+                    Add new {{table[0].__class__.__name__}}
+                </a>
+            {% endif %}
         </div>
     </div>
 </li>

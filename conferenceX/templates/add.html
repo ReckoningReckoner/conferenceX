@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% from 'dbmacro.html' import display_row %}
+
+{% block othercss %}
+    <title> add row </title>
+{% endblock %}
+
+{% block body %}
+{{display_row(row)}}
+{% endblock %}
