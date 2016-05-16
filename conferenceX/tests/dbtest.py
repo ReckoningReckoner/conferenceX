@@ -2,6 +2,7 @@
 
 
 from conferenceX.models import db, HTML, Person, Question, Price, User
+from conferenceX.models import DATABASE_DICT
 from secrets import HASHED_PW
 
 
@@ -182,6 +183,7 @@ def test_prices():
 
 
 def insert_test_data():
+    db.create_all()
     html = test_html()
     if not HTML.query.limit(1).all():
         print("html not empty, adding test data:", html)
@@ -215,6 +217,44 @@ def insert_test_data():
     db.session.commit()
     print("committed to database")
 
+
+
+def print_row(row):
+    def align(x, y):
+        a, b = len(x), len(y)
+        end = (b-a)*" "
+        print(" " + x + end, end="|")
+
+    for col in row:
+        align(str(col["column"]), str(col["value"]))
+    print("")
+
+    for col in row:
+        align(str(col["value"]), str(col["column"]))
+    print("")
+
+
+
+def test_blank_data():
+
+    for name, table in DATABASE_DICT.items():
+        row = table()
+
+        print("TABLE IS", name)
+        print("row is currently: id=", row.id)
+        print_row(row.edit_view())
+
+        db.session.add(row)
+        db.session.commit()
+        print("added blank :", name)
+
+        print("row is currently: id=", row.id)
+        print_row(row.edit_view())
+
+        db.session.delete(row)
+        db.session.commit()
+        print("deleted blank")
+        print("------------------")
+
 if __name__ == "__main__":
-    db.create_all()
     insert_test_data()

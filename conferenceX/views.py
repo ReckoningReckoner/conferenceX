@@ -10,11 +10,13 @@ app.config["SECRET_KEY"] = SECRET_KEY
 db.create_all()
 
 
-def update_row(row_edit):
+def update_row(row_dict, row=None):
     try:
-        row = get_row_from_dict(row_edit)
-        getattr(row, row_edit["column"])
-        setattr(row, row_edit["column"], row_edit["value"])
+        if row is None:
+            row = get_row_from_dict(row_dict)
+
+        getattr(row, row_dict["column"])
+        setattr(row, row_dict["column"], row_dict["value"])
     except AttributeError as e:
         raise e
 
@@ -32,25 +34,21 @@ def admin():
     if not session.get('admin'):
         return redirect(url_for("login"))
 
-    if request.method == "POST":
-        if request.json:
-            try:
-                row_edit = request.json
-                if row_edit.get("delete"):
-                    print("delete", row_edit)
-                    delete_row(row_edit)
-                else:
-                    print("update", row_edit)
-                    update_row(row_edit)
+    if request.method == "POST" and request.json:
+        try:
+            row_edit = request.json
+            if row_edit.get("delete"):
+                print("delete", row_edit)
+                delete_row(row_edit)
+            else:
+                print("update", row_edit)
+                update_row(row_edit)
 
-                db.session.commit()
-                print("committed")
-            except AttributeError as e:
-                return json.dumps({'error': str(e)}), 200
-        elif request.form:
-            print("form")
+            db.session.commit()
 
             return json.dumps({'status': 'OK'}), 200
+        except AttributeError as e:
+            return json.dumps({'error': str(e)}), 200
 
     html = HTML.query.limit(1).all()
     prices = Price.query.all()
@@ -63,7 +61,7 @@ def admin():
                            questions=questions)
 
 
-@app.route("/admin/add/<table>")
+@app.route("/admin/add/<table>", methods=["GET", "POST"])
 def add(table):
     try:
         if table == "HTML":
@@ -71,9 +69,20 @@ def add(table):
 
         new_table = get_table_from_str(table)
         row = new_table()
-        print(row.edit_view())
-        return render_template("add.html", row=row)
+        if request.method == "GET":
+            return render_template("add.html", row=row)
+        else:
+            for form in request.form:
+                row_dict = {}
+                row_dict['table'], row_dict['id'], row_dict['column'] = \
+                    form.split("-")
+                row_dict['value'] = request.form[form]
+                update_row(row_dict, row)
 
+            db.session.add(row)
+            db.session.commit()
+
+            return redirect(url_for('admin'))
     except AttributeError:
         abort(403)
 

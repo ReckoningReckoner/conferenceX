@@ -1,5 +1,5 @@
 {% macro fields(column, value, id, table) -%}
-id="{{table}}-{{id}}-{{column}}" table="{{table}}" column="{{column}}" row_id="{{id}}" value="{{value}}"
+name="{{table}}-{{id}}-{{column}}" table="{{table}}" column="{{column}}" row_id="{{id}}" value="{{value}}"
 {%- endmacro %}
 
 {% macro input(column, value, id, table, label) -%}

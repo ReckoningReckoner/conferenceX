@@ -6,5 +6,8 @@
 {% endblock %}
 
 {% block body %}
-{{display_row(row)}}
+    <form method="post">
+        {{display_row(row)}}
+        <button class="btn-large" value="Submit">Log in </button>
+    </form>
 {% endblock %}

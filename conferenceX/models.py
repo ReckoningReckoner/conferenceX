@@ -77,6 +77,13 @@ class Person(db.Model):
     school = db.Column(db.Text)
     description = db.Column(db.Text)
 
+    def __init__(self, id=None, name="", url="", school="", description=""):
+        self.id = id
+        self.name = name
+        self.url = url
+        self.school = school
+        self.description = description
+
     def __repr__(self):
         return "<Persons " + str(self.id) + " " + self.name + ">"
 
@@ -98,6 +105,11 @@ class Question(db.Model):
     question = db.Column(db.Text)
     answer = db.Column(db.Text)
 
+    def __init__(self, id=None, question="", answer=""):
+        self.id = id
+        self.question = question
+        self.answer = answer
+
     def __repr__(self):
         return "<Question " + str("self.id") + " " + self.question + ">"
 
@@ -116,6 +128,12 @@ class Price(db.Model):
     name = db.Column(db.String(80))
     price = db.Column(db.String(10))
     description = db.Column(db.Text)
+
+    def __init__(self, id=None, name="", price="", description=""):
+        self.id = id
+        self.name = name
+        self.price = price
+        self.description = description
 
     def __repr__(self):
         return "<Question " + str("self.id") + " " + self.name + ">"
