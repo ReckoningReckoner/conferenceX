@@ -1,4 +1,5 @@
 from conferenceX.tests.apptest import FlaskTest
+from getpass import getpass
 
 
 class PermissionTest():
@@ -6,7 +7,7 @@ class PermissionTest():
     def __init__(self):
         self.test_app = FlaskTest()
         self.username = input("Enter the correct username: ")
-        self.password = input("Enter the correct password: ")
+        self.password = getpass()
 
     def test_login(self, username, password, status_code, message):
         login = self.test_app.login(username, password)
