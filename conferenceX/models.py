@@ -1,8 +1,7 @@
 # Contains db tables for frontend. If this module is called, the database
 # tables are updated
 
-import bcrypt
-from conferenceX.flask_app import db
+from conferenceX.flask_app import db, bcrypt
 
 
 class HTML(db.Model):
@@ -147,7 +146,7 @@ class User(db.Model):
             raise ValueError("!! Critical:" +
                              "hash is neither bytes" +
                              "nor string!")
-        return hashed == bcrypt.hashpw(attempt, hashed)
+        return bcrypt.check_password_hash(hashed, attempt)
 
     def __repr__(self):
         return "<User " + self.username + ">"
