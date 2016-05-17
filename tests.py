@@ -32,5 +32,5 @@ if args.all or args.permission:
     ptest.test_multiple_logins()
     ptest.test_permissions()
 
-if args.fake:
+if args.all or args.fake:
     dbtest.test_fake_login()
