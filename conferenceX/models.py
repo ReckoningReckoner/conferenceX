@@ -135,7 +135,7 @@ class Price(db.Model):
 
 class User(db.Model):
     username = db.Column(db.String(80), primary_key=True)
-    hashed = db.Column(db.String(80))
+    hashed = db.Column(db.Text)
 
     def verify(self, attempt):
         attempt = bytes(attempt, 'utf-8')
