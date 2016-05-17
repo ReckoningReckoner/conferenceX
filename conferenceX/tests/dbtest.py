@@ -95,7 +95,7 @@ def test_blank_data():
 
 def test_fake_login():
     print("trying a test login")
-    h = bcrypt.hashpw(b"walla", bcrypt.gensalt())
+    h = bcrypt.generate_password_hash("walla")
     user = User(username="u", hashed=h)
     assert user.verify("walla"), "FAILURE with correct pass"
     assert not user.verify("balla"), "FAILURE with incorrect pass"
