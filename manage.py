@@ -1,5 +1,4 @@
-from conferenceX.flask_app import app
-from conferenceX.models import db
+from conferenceX.flask_app import app, db
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 

@@ -1,22 +1,8 @@
 # Contains db tables for frontend. If this module is called, the database
 # tables are updated
 
-
-from flask_sqlalchemy import SQLAlchemy
-from conferenceX.flask_app import app
-
 import bcrypt
-try:
-    from secrets import DATABASE_URI
-except ImportError:
-    import sys
-    print("no secrets.py file created, please do that")
-    sys.exit(-1)
-
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
-app.config['SQLALCHEMY_POOL_RECYCLE'] = 299
-db = SQLAlchemy(app)
+from conferenceX.flask_app import db
 
 
 class HTML(db.Model):

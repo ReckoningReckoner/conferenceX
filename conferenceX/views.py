@@ -1,16 +1,21 @@
-from conferenceX.flask_app import app
-from conferenceX.models import HTML, Person, Question, Price, User, db
+from conferenceX.flask_app import app, db
+from conferenceX.models import HTML, Person, Question, Price, User
 from conferenceX.models import get_row_from_dict, get_table_from_str
 from flask import render_template, session, redirect, url_for, request
-from flask import flash, abort
-from secrets import SECRET_KEY
+from flask import flash
 import json
-
-app.config["SECRET_KEY"] = SECRET_KEY
-db.create_all()
 
 
 def update_row(row_dict, row=None):
+    """
+    Updates a row from the database given a dictionary. A dictionary is given
+    with a 'column' to determine the column to change, and a 'value' to
+    determine what to change the current column's value to.
+
+    If the row param is left as 'None', the program will try to look for a
+    corresponding row object using the row_dicts 'table' and 'id' value.
+    """
+
     try:
         if row is None:
             row = get_row_from_dict(row_dict)
@@ -22,6 +27,10 @@ def update_row(row_dict, row=None):
 
 
 def delete_row(row):
+    """ Deletes a row from the datbase, given the row is a dictionary with keys
+    containing the 'table' and 'id' from the database
+    """
+
     try:
         row = get_row_from_dict(row)
         db.session.delete(row)
@@ -31,8 +40,12 @@ def delete_row(row):
 
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
+    """ The admin page for various things, such as editing the db.
+    If a user is NOT logged in, it should redict to the login page.
+    """
+
     if not session.get('admin'):
-        return redirect(url_for("login"))
+        return redirect(url_for("login")), 403
 
     if request.method == "POST" and request.json:
         try:
@@ -63,28 +76,37 @@ def admin():
 
 @app.route("/admin/add/<table>", methods=["GET", "POST"])
 def add(table):
+    """ Adds a table to the database based on the URL. Throws an AttributeError
+    if the table cannot be found, or a 403 error if the user looks for an
+    invalid table type """
+
+    if not session.get('admin'):
+        return redirect(url_for("login")), 403
+
     try:
         if table == "HTML":
-            raise AttributeError
+            raise AttributeError("Cannot edit HTML table")
 
         new_table = get_table_from_str(table)
-        row = new_table()
-        if request.method == "GET":
-            return render_template("add.html", row=row)
-        else:
-            for form in request.form:
-                row_dict = {}
-                row_dict['table'], row_dict['id'], row_dict['column'] = \
-                    form.split("-")
-                row_dict['value'] = request.form[form]
-                update_row(row_dict, row)
-
-            db.session.add(row)
-            db.session.commit()
-
-            return redirect(url_for('admin'))
     except AttributeError:
-        abort(403)
+        return table + " is not a valid table", 403
+
+    row = new_table()
+
+    if request.method == "GET":
+        return render_template("add.html", row=row)
+
+        for form in request.form:
+            row_dict = {}
+            row_dict['table'], row_dict['id'], row_dict['column'] = \
+                form.split("-")
+            row_dict['value'] = request.form[form]
+            update_row(row_dict, row)
+
+        db.session.add(row)
+    db.session.commit()
+
+    return redirect(url_for('admin'))
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -93,16 +115,13 @@ def login():
         if request.method == "POST":
             user = User.query.get(request.form['username'])
 
-            try:
-                # User is validated
-                if user is not None and user.verify(request.form['password']):
-                    session['admin'] = True
-                    return redirect(url_for('admin'))  # log in
+            # User is validated
+            if user is not None and user.verify(request.form['password']):
+                session['admin'] = True
+                return redirect(url_for('admin')), 202  # log in
 
-                flash("incorrect username or password")
-            except Exception as e:
-                flash(e)
-                return render_template('login.html')
+            flash("incorrect username or password")
+            return render_template('login.html'), 401
 
     return render_template("login.html")
 
