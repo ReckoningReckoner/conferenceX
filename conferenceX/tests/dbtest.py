@@ -6,6 +6,7 @@ from conferenceX.models import HTML, Person, Question, Price, User
 from conferenceX.models import DATABASE_DICT
 import conferenceX.tests.testdata as testdata
 from secrets import HASHED_PW
+import bcrypt
 
 
 def insert_test_data():
@@ -90,3 +91,12 @@ def test_blank_data():
         db.session.commit()
         print("deleted blank")
         print("------------------")
+
+
+def test_fake_login():
+    print("trying a test login")
+    h = bcrypt.hashpw(b"walla", bcrypt.gensalt())
+    user = User(username="u", hashed=h)
+    assert user.verify("walla"), "FAILURE with correct pass"
+    assert not user.verify("balla"), "FAILURE with incorrect pass"
+    print("SUCCESS")

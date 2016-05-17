@@ -13,6 +13,8 @@ parser.add_argument("-b", "--blank", help="insert then delete blanks",
                     action="store_true")
 parser.add_argument("-p", "--permission", help="test website permissions",
                     action="store_true")
+parser.add_argument("-f", "--fake", help="try logging in as root",
+                    action="store_true")
 
 args = parser.parse_args()
 
@@ -29,3 +31,6 @@ if args.all or args.permission:
     ptest = PermissionTest()
     ptest.test_multiple_logins()
     ptest.test_permissions()
+
+if args.fake:
+    dbtest.test_fake_login()
