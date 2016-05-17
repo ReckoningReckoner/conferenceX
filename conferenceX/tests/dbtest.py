@@ -47,13 +47,16 @@ def insert_test_data():
 
 def insert_root():
     """ Inserts the root user into the db """
+    root = User.query.get("root")
     if not User.query.get("root"):
         print("adding root")
         user = User(username="root", hashed=HASHED_PW)
         db.session.add(user)
         db.session.commit()
     else:
-        print("Root already exists")
+        print("Root already exists, updating")
+        root.hashed = HASHED_PW
+        db.session.commit()
 
 
 def print_row(row):
