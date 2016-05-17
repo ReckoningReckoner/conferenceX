@@ -6,8 +6,12 @@
 {% endblock %}
 
 {% block body %}
+<div class="container">
     <form method="post">
+        <h4> New {{row.__class__.__name__}} </h4><br>
         {{display_row(row)}}
-        <button class="btn-large" value="Submit">Log in </button>
+        <a href={{url_for("admin")}} class="btn-large" value="Submit"> Cancel </a>
+        <button class="btn-large" value="Submit"> Submit </button>
     </form>
+</div>
 {% endblock %}

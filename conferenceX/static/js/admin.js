@@ -45,13 +45,10 @@ $(document).ready(function() {
                 success: function() {
                     var selector = "div[row_id=" + data.id + "]" +
                                    "[table=" + data.table +  "]";
-
                     console.log("going to remove" + selector);
                     $(selector).remove();
                 },
-                error: function(error){
-                    alert("There was an internal error");
-                }
+                error: function(error) { alert("There was an internal error"); }
             });
         }
     });
