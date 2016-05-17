@@ -138,7 +138,12 @@ class User(db.Model):
     hashed = db.Column(db.Text)
 
     def verify(self, attempt):
-        return self.hashed == bcrypt.hashpw(attempt, self.hashed)
+        if type(self.hashed) is str:
+            hashed = self.hashed
+        else:
+            hashed = self.hashed.decode("utf-8")
+
+        return hashed == bcrypt.hashpw(attempt, self.hashed)
 
     def __repr__(self):
         return "<User " + self.username + ">"
