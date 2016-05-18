@@ -15,8 +15,6 @@ parser.add_argument("-p", "--permission", help="test website permissions",
                     action="store_true")
 parser.add_argument("-f", "--fake", help="try logging in as fake",
                     action="store_true")
-parser.add_argument("-rl", "--rlogin", help="try logging in as root",
-                    action="store_true")
 
 args = parser.parse_args()
 
@@ -36,6 +34,3 @@ if args.all or args.permission:
 
 if args.all or args.fake:
     dbtest.test_fake_login()
-
-if args.rlogin:
-    dbtest.test_root_login()

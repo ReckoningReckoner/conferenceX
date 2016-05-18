@@ -7,7 +7,6 @@ from conferenceX.models import DATABASE_DICT
 import conferenceX.tests.testdata as testdata
 from secrets import HASHED_PW
 import bcrypt
-from getpass import getpass
 
 
 def insert_test_data():
@@ -104,11 +103,3 @@ def test_fake_login():
     assert user.verify("walla"), "FAILURE with correct pass"
     assert not user.verify("balla"), "FAILURE with incorrect pass"
     print("PASSED user login")
-
-
-def test_root_login():
-    print("trying root login")
-    root = User.query.get('root')
-    hashed = getpass()
-    assert root.verify(hashed), "FAILURE to login to root"
-    print("PASSED root login")
