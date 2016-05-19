@@ -1,5 +1,6 @@
-# This module updates the database tables, and adds test values to it
-
+""" This module is for any tests that include inserting data into the db, or
+testing whether certain models work as expected
+"""
 
 from conferenceX.flask_app import db
 from conferenceX.models import HTML, Person, Question, Price, User
@@ -11,7 +12,6 @@ import bcrypt
 
 def insert_test_data():
     """ Inserts a bunch of test data into the databse """
-
     db.create_all()
     html = testdata.test_html()
     if not HTML.query.limit(1).all():
@@ -45,7 +45,9 @@ def insert_test_data():
 
 
 def insert_root():
-    """ Inserts the root user into the db """
+    """ Inserts the root user into the db.
+    If there already is one, update their hash from the secrets.py file
+    """
     root = User.query.get("root")
     if not User.query.get("root"):
         print("adding root")
@@ -75,7 +77,6 @@ def print_row(row):
 
 def test_blank_data():
     """ Inserts a bunch of blank data into the db, them removes them """
-
     for name, table in DATABASE_DICT.items():
         row = table()
 
@@ -97,7 +98,7 @@ def test_blank_data():
 
 
 def test_fake_login():
-    print("trying a test login")
+    """ Create a fake user (not in db) and try to login as them """
     h = bcrypt.hashpw(b"walla", bcrypt.gensalt())
     user = User(username="u", hashed=h)
     assert user.verify("walla"), "FAILURE with correct pass"

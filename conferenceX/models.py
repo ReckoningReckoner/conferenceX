@@ -1,11 +1,11 @@
-# Contains db tables for frontend. If this module is called, the database
-# tables are updated
+""" Contains db tables for frontend. """
 
 import bcrypt
 from conferenceX.flask_app import db
 
 
 class HTML(db.Model):
+    """ The text content for the index page """
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80))
 
@@ -57,6 +57,7 @@ class HTML(db.Model):
 
 
 class Person(db.Model):
+    """ A 'featured person' """
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
     url = db.Column(db.String(140))
@@ -87,6 +88,7 @@ class Person(db.Model):
 
 
 class Question(db.Model):
+    """ A question for the FAQ """
     id = db.Column(db.Integer, primary_key=True)
     question = db.Column(db.Text)
     answer = db.Column(db.Text)
@@ -110,6 +112,7 @@ class Question(db.Model):
 
 
 class Price(db.Model):
+    """ A price for a ticket """
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
     price = db.Column(db.String(10))
@@ -134,6 +137,7 @@ class Price(db.Model):
 
 
 class User(db.Model):
+    """ Root user """
     username = db.Column(db.String(80), primary_key=True)
     hashed = db.Column(db.Text)
 
@@ -151,23 +155,3 @@ class User(db.Model):
 
 DATABASE_DICT = {"HTML": HTML, "Person": Person,
                  "Question": Question, "Price": Price}
-
-
-def get_table_from_str(table):
-    new_table = DATABASE_DICT.get(table)
-    if new_table is None:
-        raise AttributeError("Invalid table name")
-
-    return new_table
-
-
-def get_row_from_dict(row_edit):
-    table = get_table_from_str(row_edit["table"])
-    if table is None:
-        raise AttributeError("Invalid table name")
-
-    row = table.query.get(row_edit["id"])
-    if row is None:
-        raise AttributeError("Invalid id. Maybe wrong type?")
-
-    return row
