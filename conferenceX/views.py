@@ -120,7 +120,7 @@ def add(table):
 
     if request.method == "GET":
         return render_template("add.html", row=row)
-
+    else:
         for form in request.form:
             row_dict = {}
             row_dict['table'], row_dict['id'], row_dict['column'] = \
@@ -129,7 +129,7 @@ def add(table):
             update_row(row_dict, row)
 
         db.session.add(row)
-    db.session.commit()
+        db.session.commit()
 
     return redirect(url_for('admin'))
 
