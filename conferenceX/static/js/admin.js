@@ -22,7 +22,7 @@ function delete_row(element){
 }
 
 $(document).ready(function() {
-    $(".dynamic-text").change(function() {
+    $(".dynamic-text").change(function(event) {
         $.ajax({
             type: "POST",
             url: "/admin",
@@ -32,7 +32,7 @@ $(document).ready(function() {
         });
     });
 
-    $(".delete-row").click(function() {
+    $(".delete-row").click(function(event) {
         if (confirm("Delete row? This cannot be undone!")){
             data = delete_row(event.target);
             console.log(data);
