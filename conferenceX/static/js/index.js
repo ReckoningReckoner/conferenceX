@@ -11,5 +11,15 @@ $(document).ready(function(){
     $(".button-collapse").sideNav({
         edge: 'right', // Choose the horizontal origin
     });
+
+    $(".featured-image").hover(
+        function(){
+            $(this).css("filter", "grayscale(0%)");
+        },
+        function(){
+            $(this).css("filter", "grayscale(100%)");
+        }
+    );
+
 });
 
