@@ -12,7 +12,7 @@
 {% macro parallax_mini(img, title) -%}
     <div class="parallax-container valign-wrapper mini-parallax">
         <div class="parallax">
-            <img alt="missing img"
+            <img alt="{{title}}"
                  src="{{img}}">
         </div>
         <div class="container valign">
@@ -65,7 +65,7 @@
     <!-- intro -->
     <div class="parallax-container valign-wrapper fullscreen">
         <div class="parallax">
-            <img alt="missing img"
+            <img alt="Phase Shift intro image"
                  src="{{url_for('static', filename='images/intro.jpeg')}}">
         </div>
         <div class="container valign">
@@ -117,14 +117,14 @@
                         <h5 class="grey-text"> Featured speakers</h5><hr>
                         {% for person in persons  %}
                             <div class="col s6 m3">
-                                <a href="#" 
-                                   data-featherlight="#Person-{{person.id}}"
-                                   class="featured">
-                                    <img alt="{{person.name}}"
-                                         class="circle"
-                                         src={{person.url}}
-                                         width=90% >
-                                </a>
+                                    <a href="#" 
+                                       data-featherlight="#Person-{{person.id}}"
+                                       class="featured">
+                                        <img alt="{{person.name}}"
+                                             class="circle"
+                                             src={{person.url}}
+                                             width=90% >
+                                    </a>
                                 <h5> {{person.name}} </h5>
                                 <p> {{person.school}} </p>
 
