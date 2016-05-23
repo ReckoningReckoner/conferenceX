@@ -26,10 +26,13 @@
 {% block othercss%}
     <title> {{html.title}} </title>
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}" media="screen,projection"/>
+    <link href="//cdn.rawgit.com/noelboss/featherlight/1.4.1/release/featherlight.min.css" type="text/css" rel="stylesheet" />
 {% endblock %}
 
 {% block script %}
     <script type="text/javascript" src="{{url_for('static', filename='js/index.js')}}"> </script>
+    <script src="//cdn.rawgit.com/noelboss/featherlight/1.4.1/release/featherlight.min.js" type="text/javascript" charset="utf-8">
+    </script>
 {% endblock %}
 
 {% block body %}
@@ -40,7 +43,7 @@
 
             <div class="container">
                 <!-- mm hamburger -->
-                <a href="/" data-activates="mobile" class="right button-collapse">
+                <a href="/" data-activates="mobile" class=" scrollto right button-collapse">
                     <i class="material-icons">
                         menu
                     </i>
@@ -79,7 +82,7 @@
             </div>
 
             <div class="center row">
-                <a class="btn-large waves-effect waves-light grey darken-4"
+                <a class="scrollto btn-large waves-effect waves-light grey darken-4"
                     href="#tickets">
                     get tickets
                 </a>
@@ -88,7 +91,7 @@
     </div>
 
     <!-- about -->
-    <div id="about" class="row section scrollspy">
+    <div id="about" class="row ">
         <div class="container center">
             <h3 class="grey-text text-darken-2">
                 About
@@ -101,7 +104,7 @@
 
         {% if html.show_program %}
         <!-- program -->
-        <div id="program" class="row section scrollspy">
+        <div id="program" class="row ">
             <div class="container center">
 
                 <h3 class="grey-text text-darken-2">
@@ -114,12 +117,25 @@
                         <h5 class="grey-text"> Featured speakers</h5><hr>
                         {% for person in persons  %}
                             <div class="col s6 m3">
-                                        <img alt="{{person["name"]}}"
-                                             class="circle featured-image"
-                                             src={{person["url"]}} >
-                                <h5> {{person["name"]}} </h5>
-                                <p> {{person["school"]}} </p>
-                                <p> {{person["description"]}} </p>
+                                <a href="#" 
+                                   data-featherlight="#Person-{{person.id}}"
+                                   class="featured">
+                                    <img alt="{{person.name}}"
+                                         class="circle"
+                                         src={{person.url}}
+                                         width=90% >
+                                </a>
+                                <h5> {{person.name}} </h5>
+                                <p> {{person.school}} </p>
+
+                                <div id="Person-{{person.id}}" class="lightbox center row">
+                                    <img alt="{{person.name}}"
+                                         class="circle"
+                                         src={{person.url}}
+                                         height=30% >
+                                    <h5> {{person.name}} </h5>
+                                    <p> {{person.description}} </p>
+                                </div>
                             </div>
                         {% endfor %}
                     </div>
@@ -141,7 +157,7 @@
 
 
     <!-- location -->
-    <div id="location" class="row section scrollspy">
+    <div id="location" class="row ">
         {{
         parallax_mini(url_for('static', filename="images/location.jpeg"),
                       'Location')
@@ -166,7 +182,7 @@
 
 
     <!-- tickets -->
-    <div id="tickets" class="row section scrollspy">
+    <div id="tickets" class="row ">
 
         {{
         parallax_mini(url_for('static', filename='images/tickets.jpeg'),
@@ -195,7 +211,7 @@
     </div>
 
     <!-- faq -->
-    <div id="faq" class="row section scrollspy">
+    <div id="faq" class="row ">
         {{
         parallax_mini(url_for('static', filename='images/faq.jpeg'),
                       'FAQ')
@@ -204,15 +220,15 @@
         <div class="container">
             {% for faq in questions %}
             <div class="col s12 m6">
-                <h5> {{faq["question"]}} </h5>
-                <p> {{faq["answer"]}} </p>
+                <h5> {{faq.question}} </h5>
+                <p> {{faq.answer | safe}} </p>
             </div>
             {% endfor %}
         </div>
     </div>
 
     <!-- apply -->
-    <div id="apply" class="row section scrollspy">
+    <div id="apply" class="row ">
         {{
         parallax_mini(url_for('static', filename='images/apply.jpeg'),
                       'Apply as a speaker')
