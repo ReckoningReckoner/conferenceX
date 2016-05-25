@@ -46,4 +46,12 @@ body {
     .featherlight-content {
         width: 42.79%;
     }
+
+    .row .col.push-m1\.5 {
+      left: 12.5%;
+    }
+
+    .row .col.push-m4\.5 {
+      left: 37.5%;
+    }
 }

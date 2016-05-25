@@ -118,8 +118,25 @@
                 <h5 class="grey-text"> Featured speakers</h5><hr>
 
                 <div class="row">
-                    {% for person in persons  %}
-                        <div class="col s6 m3">
+                {% set faces_per_row = 4 %}
+                {% for i in range(0, persons|length, faces_per_row)  %}
+                    <!-- <p> i: {{i}} </p> -->
+                    <!-- <p> last_in_row {{last_in_row}}</p> -->
+                    <!-- <p> people: {{people_in_row}} </p> -->
+                    <!-- <p> offset: {{offset_val}} </p> -->
+                    {% set last_in_row = min(i+ faces_per_row, persons | length) %}
+                    {% set people_in_row = last_in_row - i %}
+                    {% set offset_val = 12 - (people_in_row * (12//faces_per_row)) %}
+                    {% if offset_val % 2 == 0  %}
+                        {%set offset_val = offset_val// 2%}
+                    {% else %}
+                        {% set offset_val = offset_val/2 %}
+                    {% endif %}
+
+
+                    {% for j in range(i, last_in_row) %}
+                        {% set person = persons[j] %}
+                        <div class="col s6 m{{12 // faces_per_row}} push-m{{offset_val}}">
                             <a href="#"
                                data-featherlight="#Person-{{person.id}}">
                                 <img alt="{{person.name}}"
@@ -128,17 +145,18 @@
                             </a>
                             <h5> {{person.name}} </h5>
                             <p> {{person.school}} </p>
+                            <div id="Person-{{person.id}}" class="lightbox center row">
+                                <img alt="{{person.name}}"
+                                     class="circle"
+                                     src={{person.url}}
+                                     height=30% >
+                                <h5> {{person.name}} </h5>
+                                <p> {{person.description}} </p>
+                            </div>
                         </div>
 
-                        <div id="Person-{{person.id}}" class="lightbox center row">
-                            <img alt="{{person.name}}"
-                                 class="circle"
-                                 src={{person.url}}
-                                 height=30% >
-                            <h5> {{person.name}} </h5>
-                            <p> {{person.description}} </p>
-                        </div>
                     {% endfor %}
+                {% endfor %}
                 </div>
 
                 <div class="row">
