@@ -14,9 +14,11 @@ $(document).ready(function(){
 
     $(".featured-image").hover(
         function(){
+            $(this).css("-webkit-filter", "grayscale(0%)");
             $(this).css("filter", "grayscale(0%)");
         },
         function(){
+            $(this).css("-webkit-filter", "grayscale(100%)");
             $(this).css("filter", "grayscale(100%)");
         }
     );
