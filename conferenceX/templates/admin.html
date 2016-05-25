@@ -59,13 +59,15 @@
             will automatically apply
         </h5>
         <a class="btn" href={{url_for("logout")}}> Log out </a>
-
+        <a class="btn" href={{url_for("index")}} target="_blank">
+            View Website in New Tab 
+        </a>
 
         <ul class="collapsible" data-collapsible="expandable">
             {{edit_table(html, "Edit Text")}}
             {{edit_table(persons, "Edit Featured Speakers")}}
             {{edit_table(prices, "Edit Prices")}}
-            {{edit_table(questions, "Edit  FAQ")}}
+            {{edit_table(questions, "Edit FAQ")}}
         </ul>
 
     </div>
