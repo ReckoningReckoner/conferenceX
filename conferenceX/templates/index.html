@@ -24,7 +24,15 @@
 {% endmacro %}
 
 {% block othercss%}
-    <title> {{html.title}} </title>
+    <title> 
+        {{html.title}}: A Mississauga based event where speakers
+        will share their opinions and ideas on a variety of topics.
+    </title>
+    <meta name="description"
+          content="Phase Shift is a student run, Mississauga based event in
+          which a series of speakers will share their opinions and ideas on a
+          variety of topics." > 
+          
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}" media="screen,projection"/>
     <link href="//cdn.rawgit.com/noelboss/featherlight/1.4.1/release/featherlight.min.css" type="text/css" rel="stylesheet" />
 {% endblock %}
