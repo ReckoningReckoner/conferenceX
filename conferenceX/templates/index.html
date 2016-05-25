@@ -35,7 +35,7 @@
         {% endif %}
 
         {% for j in range(i, last_in_row) %}
-            {{ show_featured_person(persons[i], offset_val, faces_per_row) }}
+            {{ show_featured_person(persons[j], offset_val, faces_per_row) }}
         {% endfor %}
     {% endfor %}
 {% endmacro %}
@@ -136,12 +136,11 @@
     </div>
 
     <!-- about -->
-    <div id="about" class="row ">
-        <div class="container center">
-            <h3 class="grey-text text-darken-2"> About </h3>
-            <p class="light flow-text"> {{html.about | safe}} </p>
+    <div id="about" class="row container center">
+        <h3 class="grey-text text-darken-2"> About </h3>
+        <p class="light flow-text"> {{html.about | safe}} </p>
 
-            {% if html.show_program %}
+        {% if html.show_program %}
             <h3 class="grey-text text-darken-2"> Program </h3>
             <h5 class="grey-text"> Featured speakers</h5><hr>
             {{show_all_persons(persons, 4)}}
@@ -152,9 +151,7 @@
                     {{html.table|safe}}
                 </table>
             </div>
-            {% endif %}
-
-        </div>
+        {% endif %}
     </div>
 
 
