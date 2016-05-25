@@ -41,3 +41,9 @@ body {
 .lightbox {
     display: none;
 }
+
+@media only screen and (min-width: 601px) {
+    .featherlight-content {
+        width: 42.79%;
+    }
+}

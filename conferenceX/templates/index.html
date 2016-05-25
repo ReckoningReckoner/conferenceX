@@ -34,13 +34,12 @@
           variety of topics." > 
           
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}" media="screen,projection"/>
-    <link href="//cdn.rawgit.com/noelboss/featherlight/1.4.1/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+    <link href="http://cdn.rawgit.com/noelboss/featherlight/1.4.1/release/featherlight.min.css" type="text/css" rel="stylesheet" />
 {% endblock %}
 
 {% block script %}
+    <script src="http://cdn.rawgit.com/noelboss/featherlight/1.4.1/release/featherlight.min.js" type="text/javascript" charset="utf-8"> </script>
     <script type="text/javascript" src="{{url_for('static', filename='js/index.js')}}"> </script>
-    <script src="//cdn.rawgit.com/noelboss/featherlight/1.4.1/release/featherlight.min.js" type="text/javascript" charset="utf-8">
-    </script>
 {% endblock %}
 
 {% block body %}
@@ -115,36 +114,31 @@
         <div id="program" class="row ">
             <div class="container center">
 
-                <h3 class="grey-text text-darken-2">
-                    Program
-                </h3>
+                <h3 class="grey-text text-darken-2"> Program </h3>
+                <h5 class="grey-text"> Featured speakers</h5><hr>
 
                 <div class="row">
-                    <div class="col s12 hover-hightlight">
-
-                        <h5 class="grey-text"> Featured speakers</h5><hr>
-                        {% for person in persons  %}
-                            <div class="col s6 m3">
-                                <a href="#"
-                                   data-featherlight="#Person-{{person.id}}">
-                                    <img alt="{{person.name}}"
-                                         class="circle featured-image"
-                                         src={{person.url}} width=90% >
-                                </a>
-                                <h5> {{person.name}} </h5>
-                                <p> {{person.school}} </p>
-                            </div>
-
-                            <div id="Person-{{person.id}}" class="lightbox center row">
+                    {% for person in persons  %}
+                        <div class="col s6 m3">
+                            <a href="#"
+                               data-featherlight="#Person-{{person.id}}">
                                 <img alt="{{person.name}}"
-                                     class="circle"
-                                     src={{person.url}}
-                                     height=30% >
-                                <h5> {{person.name}} </h5>
-                                <p> {{person.description}} </p>
-                            </div>
-                        {% endfor %}
-                    </div>
+                                     class="circle featured-image"
+                                     src={{person.url}} width=90% >
+                            </a>
+                            <h5> {{person.name}} </h5>
+                            <p> {{person.school}} </p>
+                        </div>
+
+                        <div id="Person-{{person.id}}" class="lightbox center row">
+                            <img alt="{{person.name}}"
+                                 class="circle"
+                                 src={{person.url}}
+                                 height=30% >
+                            <h5> {{person.name}} </h5>
+                            <p> {{person.description}} </p>
+                        </div>
+                    {% endfor %}
                 </div>
 
                 <div class="row">
