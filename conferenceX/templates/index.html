@@ -125,24 +125,23 @@
                         <h5 class="grey-text"> Featured speakers</h5><hr>
                         {% for person in persons  %}
                             <div class="col s6 m3">
-                                    <a href="#"
-                                       data-featherlight="#Person-{{person.id}}">
-                                        <img alt="{{person.name}}"
-                                             class="circle featured-image"
-                                             src={{person.url}}
-                                             width=90% >
-                                    </a>
+                                <a href="#"
+                                   data-featherlight="#Person-{{person.id}}">
+                                    <img alt="{{person.name}}"
+                                         class="circle featured-image"
+                                         src={{person.url}} width=90% >
+                                </a>
                                 <h5> {{person.name}} </h5>
                                 <p> {{person.school}} </p>
+                            </div>
 
-                                <div id="Person-{{person.id}}" class="lightbox center row">
-                                    <img alt="{{person.name}}"
-                                         class="circle"
-                                         src={{person.url}}
-                                         height=30% >
-                                    <h5> {{person.name}} </h5>
-                                    <p> {{person.description}} </p>
-                                </div>
+                            <div id="Person-{{person.id}}" class="lightbox center row">
+                                <img alt="{{person.name}}"
+                                     class="circle"
+                                     src={{person.url}}
+                                     height=30% >
+                                <h5> {{person.name}} </h5>
+                                <p> {{person.description}} </p>
                             </div>
                         {% endfor %}
                     </div>
