@@ -62,14 +62,14 @@
 {% endmacro %}
 
 {% block othercss%}
-    <title> 
+    <title>
         {{html.title}}: Ordinary people with extraordinary ideas
     </title>
     <meta name="description"
           content="Phase Shift is a student run, Mississauga based event in
           which a series of speakers will share their opinions and ideas on a
-          variety of topics." > 
-          
+          variety of topics." >
+
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}" media="screen,projection"/>
     <link href="http://cdn.rawgit.com/noelboss/featherlight/1.4.1/release/featherlight.min.css" type="text/css" rel="stylesheet" />
 {% endblock %}
@@ -110,7 +110,7 @@
     <div class="parallax-container valign-wrapper fullscreen">
         <div class="parallax">
             <img alt="Phase Shift intro image"
-                 src="{{url_for('static', filename='images/intro.jpeg')}}">
+                 src="{{url_for('static', filename='images/intro_greyed.jpg')}}">
         </div>
         <div class="container valign">
             <div class="title center white-text">
@@ -120,7 +120,7 @@
             </div>
 
             <div class="row center col s12 m6 offset-m2">
-                <h5 class="white-text">
+                <h5 class="white-text light">
                     {{html.subtitle | safe }}
                 </h5>
             </div>
