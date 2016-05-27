@@ -216,8 +216,9 @@
         }}
 
         <div class="container row">
+            {%set mid = ((questions| length)/2) | round(0, 'ceil') | int%}
             <div class="col s12 m6">
-            {% for i in range(0, questions|length // 2) %}
+            {% for i in range(0, mid) %}
                 <div class="col s12" style="left: 0%;">
                     <h5> {{questions[i].question}} </h5>
                     <p> {{questions[i].answer | safe}} </p>
@@ -226,7 +227,7 @@
             </div>
 
             <div class="col s12 m6">
-            {% for i in range(questions|length // 2, questions|length) %}
+            {% for i in range(mid, questions|length) %}
                 <div class="col s12" style="left: 0%;">
                     <h5> {{questions[i].question}} </h5>
                     <p> {{questions[i].answer | safe}} </p>
