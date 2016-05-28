@@ -20,6 +20,7 @@ body {
 .featured-image{
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
+    width: 88%;
 }
 
 .mini-parallax{
