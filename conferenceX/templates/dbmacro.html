@@ -19,16 +19,17 @@ name="{{table}}-{{id}}-{{column}}" table="{{table}}" column="{{column}}" row_id=
         </div>
     {% else %}
 
-        {% if not value or value | length < 200%}
-            {% set width = "s6" %}
-            {% set element_type = "input" %}
-            {% set class = "small-text" %}
-        {% else %}
-            {% set width = "s12" %}
-            {% set element_type = "textarea" %}
-            {% set textarea_default = value %}
-            {% set class = "materialize-textarea" %}
-        {% endif %}
+        {# if not value or value | length < 200#}
+        {# set width = "s6" #}
+        {# set element_type = "input" #}
+        {# set class = "small-text" #}
+        {# else #}
+        {# endif #}
+
+        {% set width = "s12" %}
+        {% set element_type = "textarea" %}
+        {% set textarea_default = value %}
+        {% set class = "materialize-textarea" %}
 
         <div class="input-field col s12">
             <{{element_type|safe}} {{fields(column, value, id, table)}}
