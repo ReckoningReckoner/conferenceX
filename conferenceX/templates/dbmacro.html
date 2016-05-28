@@ -33,9 +33,7 @@ name="{{table}}-{{id}}-{{column}}" table="{{table}}" column="{{column}}" row_id=
 
         <div class="input-field col s12">
             <{{element_type|safe}} {{fields(column, value, id, table)}}
-             class="dynamic-text {{class|safe}}">
-                 {{textarea_default}}
-             </{{element_type|safe}}>
+             class="dynamic-text {{class|safe}}">{{textarea_default}}</{{element_type|safe}}>
 
             <label for="{{table}}-{{id}}-{{column}}" class="active">
                 {{label}}
