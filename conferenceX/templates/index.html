@@ -25,6 +25,7 @@
 {% block script %}
     <script src="http://cdn.rawgit.com/noelboss/featherlight/1.4.1/release/featherlight.min.js" type="text/javascript" charset="utf-8"> </script>
     <script type="text/javascript" src="{{url_for('static', filename='js/index.js')}}"> </script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/index.js')}}"> </script>
 {% endblock %}
 
 {% macro parallax_mini(img, title) -%}
@@ -103,8 +104,8 @@
                 <img alt="{{person.name}}" class="circle featured-image"
                      src={{person.url}}>
             </a>
-            <h5> {{person.name}} </h5>
-            <p> {{person.school}} </p>
+            <h6 class="nowrap bold-title"> {{person.name}} </h6>
+            <h6 class="nowrap"> {{person.school}} </h6>
         </div>
         <div id="Person-{{person.id}}" class="lightbox center row">
             <img alt="{{person.name}}"
@@ -275,8 +276,8 @@
             <div class="col s6 m3">
                 <img alt="{{name}}" class="circle featured-image"
                      src={{url_for('static', filename="images/" + name + ".jpg")}}>
-                 <h5> {{full_name}} </h5>
-                 <h6> {{title}} </h6>
+                 <h6 class="nowrap bold-title"> {{full_name}} </h6>
+                 <h6 class="nowrap"> {{title}} </h6>
             </div>
         {% endmacro %}
 
