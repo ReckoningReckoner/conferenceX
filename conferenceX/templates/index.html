@@ -50,6 +50,11 @@
         <div class="nav-wrapper">
 
             <div class="container">
+                <span class="header-image">
+                    <a href="#intro" class="scrollto">
+                        <img src="{{url_for('static', filename='logo/logo.png')}}">
+                    </a>
+                </span>
                 <!-- mm hamburger -->
                 <a href="/" data-activates="mobile" class="right button-collapse">
                     <i class="material-icons">
@@ -71,13 +76,13 @@
     </nav>
 
     <!-- intro -->
-    <div class="parallax-container valign-wrapper fullscreen">
+    <div id="intro" class="parallax-container valign-wrapper fullscreen">
         <div class="parallax">
             <img alt="Phase Shift intro image"
                  src="{{url_for('static', filename='images/intro_greyed.jpg')}}">
         </div>
         <div class="container valign">
-            <div class="title center white-text">
+            <div id="title" class="title center white-text">
                 <h1 class="bold">
                     {{html.title | safe}}
                 </h1>
