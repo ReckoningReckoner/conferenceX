@@ -9,11 +9,6 @@
 <li> <a class="scrollto" href="#contact"> Contact Us </a> </li>
 {% endmacro %}
 
-{% macro social_media() %}
-<li> <a href="https://twitter.com/_PhaseShift"> Facebook </a> </li>
-<li> <a href="https://www.facebook.com/Phase-Shift-1633878273602288/"> Twitter </a> </li>
-<li> <a href="http://instagram.com/phase.shift_official"> Instagram </a> </li>
-{% endmacro %}
 
 {% block othercss%}
     <title>
@@ -26,6 +21,7 @@
 
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}" media="screen,projection"/>
     <link href="http://cdn.rawgit.com/noelboss/featherlight/1.4.1/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.3.1/css/simple-line-icons.css">
 {% endblock %}
 
 {% block script %}
@@ -281,6 +277,25 @@
                     contact@phaseshift.xyz
                 </a>
             </p>
+            <div class="col s12 m6 push-m3">
+                <div class="row">
+                    <div class="col s4">
+                        <a href="https://www.facebook.com/Phase-Shift-1633878273602288/">
+                            <i class="black-text social-icon icon-social-facebook"></i>
+                        </a>
+                    </div>
+                    <div class="col s4">
+                        <a href="https://twitter.com/_PhaseShift">
+                            <i class="black-text social-icon icon-social-twitter"></i>
+                        </a>
+                    </div>
+                    <div class="col s4">
+                        <a href="http://instagram.com/phase.shift_official">
+                            <i class="black-text social-icon icon-social-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
 
         {% macro show_exec(name, full_name, title) %}
@@ -301,6 +316,13 @@
         </div>
     </div>
 
+ 
+    {% macro social_media() %}
+    <li> <a href="https://twitter.com/_PhaseShift"> Facebook </a> </li>
+    <li> <a href="https://www.facebook.com/Phase-Shift-1633878273602288/"> Twitter </a> </li>
+    <li> <a href="http://instagram.com/phase.shift_official"> Instagram </a> </li>
+    {% endmacro %}
+
     <!-- footer -->
     <footer class="page-footer grey lighten-2">
         <div class="container">
@@ -309,7 +331,9 @@
                     <h5 class="grey-text text-darken-2">Talk to us</h5>
 
                     <ul>
-                        <a href="mailto:contact@phaseshift.xyz"> contact@phaseshift.xyz </a>
+                        <li>
+                            <a href="mailto:contact@phaseshift.xyz"> contact@phaseshift.xyz </a>
+                        </li>
                         {{social_media()}}
                     </ul>
                 </div>
