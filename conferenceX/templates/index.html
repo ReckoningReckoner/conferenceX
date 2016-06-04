@@ -7,7 +7,12 @@
 <li> <a class="scrollto" href="#faq"> FAQ </a> </li>
 <li> <a class="scrollto" href="#apply"> Apply as a speaker </a> </li>
 <li> <a class="scrollto" href="#contact"> Contact Us </a> </li>
-<!-- <li> <a class="scrollto" href="https://www.sponseasy.com/p/phaseshift-0"> Sponsor Us </a> </li> -->
+{% endmacro %}
+
+{% macro social_media() %}
+<li> <a href="https://twitter.com/_PhaseShift"> Facebook </a> </li>
+<li> <a href="https://www.facebook.com/Phase-Shift-1633878273602288/"> Twitter </a> </li>
+<li> <a href="http://instagram.com/phase.shift_official"> Instagram </a> </li>
 {% endmacro %}
 
 {% block othercss%}
@@ -303,9 +308,10 @@
                 <div class="col l6 s12">
                     <h5 class="grey-text text-darken-2">Talk to us</h5>
 
-                    <a href="mailto:contact@phaseshift.xyz">
-                        contact@phaseshift.xyz
-                    </a>
+                    <ul>
+                        <a href="mailto:contact@phaseshift.xyz"> contact@phaseshift.xyz </a>
+                        {{social_media()}}
+                    </ul>
                 </div>
                 <div class="col l4 offset-l2 s12">
                     <h5 class="grey-text text-darken-2">Links</h5>
