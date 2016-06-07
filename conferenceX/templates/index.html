@@ -105,23 +105,23 @@
     </div>
 
     {% macro show_featured_person(person, offset_val, faces_per_row) -%}
-        <div class="col s6 m{{12 // faces_per_row}} push-m{{offset_val}}">
-            <a href="#"
-               data-featherlight="#Person-{{person.id}}">
-                <img alt="{{person.name}}" class="circle featured-image"
-                     src={{person.url}}>
-            </a>
-            <h6 class="nowrap bold-title"> {{person.name}} </h6>
-            <h6 class="nowrap"> {{person.school}} </h6>
-        </div>
-        <div id="Person-{{person.id}}" class="lightbox center row">
-            <img alt="{{person.name}}"
-                 class="circle"
-                 src={{person.url}}
-                 height=30% >
-            <h5> {{person.name}} </h5>
-            <p> {{person.description}} </p>
-        </div>
+    <div class="col s6 m{{12 // faces_per_row}} push-m{{offset_val}}">
+        <a href="#"
+           data-featherlight="#Person-{{person.id}}">
+            <img alt="{{person.name}}" class="circle featured-image"
+                 src={{person.url}}>
+        </a>
+        <h6 class="nowrap bold-title"> {{person.name}} </h6>
+        <h6 class="nowrap"> {{person.school}} </h6>
+    </div>
+    <div id="Person-{{person.id}}" class="lightbox center row">
+        <img alt="{{person.name}}"
+             class="circle"
+             src={{person.url}}
+             height=30% >
+        <h5> {{person.name}} </h5>
+        <p> {{person.description}} </p>
+    </div>
     {% endmacro %}
 
     {% macro show_all_persons(persons, faces_per_row) -%}
@@ -300,12 +300,12 @@
         </div>
 
         {% macro show_exec(name, full_name, title) %}
-            <div class="col s6 m3">
-                <img alt="{{name}}" class="circle featured-image"
-                     src={{url_for('static', filename="images/" + name + ".jpg")}}>
-                 <h6 class="nowrap bold-title"> {{full_name}} </h6>
-                 <h6 class="nowrap"> {{title}} </h6>
-            </div>
+        <div class="col s6 m3">
+            <img alt="{{name}}" class="circle featured-image"
+                 src={{url_for('static', filename="images/" + name + ".jpg")}}>
+             <h6 class="nowrap bold-title"> {{full_name}} </h6>
+             <h6 class="nowrap"> {{title}} </h6>
+        </div>
         {% endmacro %}
 
         <h5 class="light">Meet the team:</h5>
@@ -317,7 +317,7 @@
         </div>
     </div>
 
- 
+
     {% macro social_media() %}
     <li> <a href="https://twitter.com/_PhaseShift"> Facebook </a> </li>
     <li> <a href="https://www.facebook.com/Phase-Shift-1633878273602288/"> Twitter </a> </li>
