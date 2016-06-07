@@ -117,12 +117,14 @@ class Price(db.Model):
     name = db.Column(db.String(80))
     price = db.Column(db.String(10))
     description = db.Column(db.Text)
+    url = db.Column(db.Text)
 
-    def __init__(self, id=None, name="", price="", description=""):
+    def __init__(self, id=None, name="", price="", description="", url=""):
         self.id = id
         self.name = name
         self.price = price
         self.description = description
+        self.url = url
 
     def __repr__(self):
         return "<Question " + str("self.id") + " " + self.name + ">"
@@ -133,6 +135,8 @@ class Price(db.Model):
         edit.append({"column": "price", "label": "Price", "value": self.price})
         edit.append({"column": "description", "label": "Subheading",
                      "value": self.description})
+        edit.append({"column": "url", "label": "Tilt URL",
+                     "value": self.url})
         return edit
 
 

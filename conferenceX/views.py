@@ -162,6 +162,7 @@ def logout():
 @app.route("/")
 def index():
     """ The main page with the majority of content """
+
     html = HTML.query.limit(1).all()[0]
     prices = Price.query.all()
     persons = Person.query.all()

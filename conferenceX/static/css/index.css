@@ -27,6 +27,11 @@ body {
     height: 20%;
 }
 
+.header-image img{
+    margin-top: 0.8%;
+    height: 80%;
+}
+
 .small-text{
     font-size: 20px;
     font-style: thin;
@@ -63,4 +68,8 @@ body {
     .row .col.push-m4\.5 {
       left: 37.5%;
     }
+}
+
+.social-icon{
+    font-size: 50;
 }

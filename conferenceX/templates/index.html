@@ -7,10 +7,10 @@
 <li> <a class="scrollto" href="#faq"> FAQ </a> </li>
 <li> <a class="scrollto" href="#apply"> Apply as a speaker </a> </li>
 <li> <a class="scrollto" href="#contact"> Contact Us </a> </li>
-<!-- <li> <a class="scrollto" href="https://www.sponseasy.com/p/phaseshift-0"> Sponsor Us </a> </li> -->
 {% endmacro %}
 
-{% block othercss%}
+
+{% block othercss %}
     <title>
         {{html.title}}: Ordinary people with extraordinary ideas
     </title>
@@ -21,6 +21,7 @@
 
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}" media="screen,projection"/>
     <link href="http://cdn.rawgit.com/noelboss/featherlight/1.4.1/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.3.1/css/simple-line-icons.css">
 {% endblock %}
 
 {% block script %}
@@ -44,40 +45,42 @@
 {% endmacro %}
 
 {% block body %}
-    <!-- navbar -->
+    {# navbar #}
     <nav id="navbar"
          class="grey darken-4 navbar-fixed">
         <div class="nav-wrapper">
 
             <div class="container">
-                <!-- mm hamburger -->
-                <a href="/" data-activates="mobile" class="right button-collapse">
-                    <i class="material-icons">
-                        menu
-                    </i>
-                </a>
 
-                <!-- navbar hamburger -->
-                <ul class="side-nav" id="mobile">
-                    {{ list_of_links()}}
-                </ul>
+                <span>
+                    <a href="#intro" class="center scrollto header-image">
+                        <img src="{{url_for('static', filename='logo/logo.png')}}">
+                    </a>
+                </span>
 
-                <!-- navbar large -->
+                {# large navbar #}
                 <ul id="large" class="right hide-on-med-and-down">
                     {{ list_of_links() }}
                 </ul>
+
+                {# mobile navbar #}
+                <a href="/" data-activates="mobile" class="right button-collapse">
+                    <i class="material-icons"> menu </i>
+                </a>
+
+                <ul class="side-nav" id="mobile"> {{ list_of_links()}} </ul>
             </div>
         </div>
     </nav>
 
-    <!-- intro -->
-    <div class="parallax-container valign-wrapper fullscreen">
+    {# intro #}
+    <div id="intro" class="parallax-container valign-wrapper fullscreen">
         <div class="parallax">
             <img alt="Phase Shift intro image"
                  src="{{url_for('static', filename='images/intro_greyed.jpg')}}">
         </div>
         <div class="container valign">
-            <div class="title center white-text">
+            <div id="title" class="title center white-text">
                 <h1 class="bold">
                     {{html.title | safe}}
                 </h1>
@@ -99,23 +102,23 @@
     </div>
 
     {% macro show_featured_person(person, offset_val, faces_per_row) -%}
-        <div class="col s6 m{{12 // faces_per_row}} push-m{{offset_val}}">
-            <a href="#"
-               data-featherlight="#Person-{{person.id}}">
-                <img alt="{{person.name}}" class="circle featured-image"
-                     src={{person.url}}>
-            </a>
-            <h6 class="nowrap bold-title"> {{person.name}} </h6>
-            <h6 class="nowrap"> {{person.school}} </h6>
-        </div>
-        <div id="Person-{{person.id}}" class="lightbox center row">
-            <img alt="{{person.name}}"
-                 class="circle"
-                 src={{person.url}}
-                 height=30% >
-            <h5> {{person.name}} </h5>
-            <p> {{person.description}} </p>
-        </div>
+    <div class="col s6 m{{12 // faces_per_row}} push-m{{offset_val}}">
+        <a href="#"
+           data-featherlight="#Person-{{person.id}}">
+            <img alt="{{person.name}}" class="circle featured-image"
+                 src={{person.url}}>
+        </a>
+        <h6 class="nowrap bold-title"> {{person.name}} </h6>
+        <h6 class="nowrap"> {{person.school}} </h6>
+    </div>
+    <div id="Person-{{person.id}}" class="lightbox center row">
+        <img alt="{{person.name}}"
+             class="circle"
+             src={{person.url}}
+             height=30% >
+        <h5> {{person.name}} </h5>
+        <p> {{person.description}} </p>
+    </div>
     {% endmacro %}
 
     {% macro show_all_persons(persons, faces_per_row) -%}
@@ -135,7 +138,7 @@
         {% endfor %}
     {% endmacro %}
 
-    <!-- about -->
+    {# about #}
     <div id="about" class="row container center">
         <h3 class="grey-text text-darken-2"> About </h3>
         <p class="light flow-text"> {{html.about | safe}} </p>
@@ -155,7 +158,7 @@
     </div>
 
 
-    <!-- location -->
+    {# location #}
     <div id="location" class="row ">
         {{
         parallax_mini(url_for('static', filename="images/location.jpeg"),
@@ -180,7 +183,7 @@
     </div>
 
 
-    <!-- tickets -->
+    {# tickets #}
     <div id="tickets" class="row ">
 
         {{
@@ -193,23 +196,35 @@
                 <p class="flow-text"> Tickets are priced at </p>
                 {% for price in prices %}
                     <div class="col s12 m{{ 12//(prices|length) }}">
-                        <h5 class="grey-text text-darken-2"> {{price['name']}} </h5>
-                        <h4> {{price['price']}} </h4>
-                        <p class="grey-text text-darken-2"> {{price['description']}} </p>
+                        <h5 class="grey-text text-darken-2"> {{price.name}} </h5>
+                        <h4> {{price.price}} </h4>
+                        <p class="grey-text text-darken-2"> {{price.description}} </p>
                     </div>
                 {% endfor %}
             </div>
             {% if html.show_ticket_button%}
-                <a class="btn-large grey darken-4 waves-effect waves-light">
+                <a class="btn-large grey darken-4 waves-effect waves-light dropdown-button"
+                   href="https://www.tilt.com/users/gli79/organized"
+                   data-activates='ticket-types'>
                     Buy Now
                 </a>
+
+                <ul id="ticket-types" class="dropdown-content">
+                    {% for price in prices %}
+                    <li>
+                        <a href="{{price.url}}" class="grey-text text-darken-4">
+                            {{price.name}}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
             {% else %}
                 <a class="btn-large disabled"> Tickets coming soon </a>
             {% endif %}
         </div>
     </div>
 
-    <!-- faq -->
+    {# faq #}
     <div id="faq" class="row ">
         {{
         parallax_mini(url_for('static', filename='images/faq.jpeg'),
@@ -238,7 +253,7 @@
         </div>
     </div>
 
-    <!-- apply -->
+    {# apply #}
     <div id="apply" class="row ">
         {{
         parallax_mini(url_for('static', filename='images/apply.jpeg'),
@@ -259,7 +274,7 @@
         </div>
     </div>
 
-    <!-- contact -->
+    {# contact #}
     <div id="contact" class="center row section scrollspy container">
         <h3 class="grey-text darken-2"> Contact Us</h3>
 
@@ -271,15 +286,34 @@
                     contact@phaseshift.xyz
                 </a>
             </p>
+            <div class="col s12 m6 push-m3">
+                <div class="row">
+                    <div class="col s4">
+                        <a href="https://www.facebook.com/Phase-Shift-1633878273602288/">
+                            <i class="black-text social-icon icon-social-facebook"></i>
+                        </a>
+                    </div>
+                    <div class="col s4">
+                        <a href="https://twitter.com/_PhaseShift">
+                            <i class="black-text social-icon icon-social-twitter"></i>
+                        </a>
+                    </div>
+                    <div class="col s4">
+                        <a href="http://instagram.com/phase.shift_official">
+                            <i class="black-text social-icon icon-social-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
 
         {% macro show_exec(name, full_name, title) %}
-            <div class="col s6 m3">
-                <img alt="{{name}}" class="circle featured-image"
-                     src={{url_for('static', filename="images/" + name + ".jpg")}}>
-                 <h6 class="nowrap bold-title"> {{full_name}} </h6>
-                 <h6 class="nowrap"> {{title}} </h6>
-            </div>
+        <div class="col s6 m3">
+            <img alt="{{name}}" class="circle featured-image"
+                 src={{url_for('static', filename="images/" + name + ".jpg")}}>
+             <h6 class="nowrap bold-title"> {{full_name}} </h6>
+             <h6 class="nowrap"> {{title}} </h6>
+        </div>
         {% endmacro %}
 
         <h5 class="light">Meet the team:</h5>
@@ -291,16 +325,26 @@
         </div>
     </div>
 
-    <!-- footer -->
+
+    {% macro social_media() %}
+    <li> <a href="https://twitter.com/_PhaseShift"> Facebook </a> </li>
+    <li> <a href="https://www.facebook.com/Phase-Shift-1633878273602288/"> Twitter </a> </li>
+    <li> <a href="http://instagram.com/phase.shift_official"> Instagram </a> </li>
+    {% endmacro %}
+
+    {# footer #}
     <footer class="page-footer grey lighten-2">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
                     <h5 class="grey-text text-darken-2">Talk to us</h5>
 
-                    <a href="mailto:contact@phaseshift.xyz">
-                        contact@phaseshift.xyz
-                    </a>
+                    <ul>
+                        <li>
+                            <a href="mailto:contact@phaseshift.xyz"> contact@phaseshift.xyz </a>
+                        </li>
+                        {{social_media()}}
+                    </ul>
                 </div>
                 <div class="col l4 offset-l2 s12">
                     <h5 class="grey-text text-darken-2">Links</h5>
