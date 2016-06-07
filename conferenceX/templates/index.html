@@ -10,7 +10,7 @@
 {% endmacro %}
 
 
-{% block othercss%}
+{% block othercss %}
     <title>
         {{html.title}}: Ordinary people with extraordinary ideas
     </title>
@@ -51,16 +51,17 @@
         <div class="nav-wrapper">
 
             <div class="container">
-                <!-- <a href="#intro" class="center scrollto header-image"> -->
-                <!--     <img src="{{url_for('static', filename='logo/logo.png')}}"> -->
-                <!-- </a> -->
+
+                <span>
+                    <a href="#intro" class="center scrollto header-image">
+                        <img src="{{url_for('static', filename='logo/logo.png')}}">
+                    </a>
+                </span>
 
                 {# large navbar #}
-                <div class="center-links">
-                    <ul id="large" style="text-align: center;" class="hide-on-med-and-down">
-                        {{ list_of_links() }}
-                    </ul>
-                </div>
+                <ul id="large" class="right hide-on-med-and-down">
+                    {{ list_of_links() }}
+                </ul>
 
                 {# mobile navbar #}
                 <a href="/" data-activates="mobile" class="right button-collapse">
@@ -195,17 +196,28 @@
                 <p class="flow-text"> Tickets are priced at </p>
                 {% for price in prices %}
                     <div class="col s12 m{{ 12//(prices|length) }}">
-                        <h5 class="grey-text text-darken-2"> {{price['name']}} </h5>
-                        <h4> {{price['price']}} </h4>
-                        <p class="grey-text text-darken-2"> {{price['description']}} </p>
+                        <h5 class="grey-text text-darken-2"> {{price.name}} </h5>
+                        <h4> {{price.price}} </h4>
+                        <p class="grey-text text-darken-2"> {{price.description}} </p>
                     </div>
                 {% endfor %}
             </div>
             {% if html.show_ticket_button%}
-                <a class="btn-large grey darken-4 waves-effect waves-light"
-                   href="https://www.tilt.com/users/gli79/organized">
+                <a class="btn-large grey darken-4 waves-effect waves-light dropdown-button"
+                   href="https://www.tilt.com/users/gli79/organized"
+                   data-activates='ticket-types'>
                     Buy Now
                 </a>
+
+                <ul id="ticket-types" class="dropdown-content">
+                    {% for price in prices %}
+                    <li>
+                        <a href="{{price.url}}" class="grey-text text-darken-4">
+                            {{price.name}}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
             {% else %}
                 <a class="btn-large disabled"> Tickets coming soon </a>
             {% endif %}

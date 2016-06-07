@@ -5,7 +5,7 @@ name="{{table}}-{{id}}-{{column}}" table="{{table}}" column="{{column}}" row_id=
 {% macro input(column, value, id, table, label) -%}
     {% if value == True or value == False %}
         {% if value %}
-            {% set to_check="checked" %}
+            {% set to_check = "checked" %}
         {%endif %}
         <div class="col s3 switch">
             <span class="grey-text"> {{label}} </span><br>
