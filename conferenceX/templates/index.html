@@ -45,38 +45,34 @@
 {% endmacro %}
 
 {% block body %}
-    <!-- navbar -->
+    {# navbar #}
     <nav id="navbar"
          class="grey darken-4 navbar-fixed">
         <div class="nav-wrapper">
 
             <div class="container">
-                <span class="header-image">
-                    <a href="#intro" class="scrollto">
-                        <img src="{{url_for('static', filename='logo/logo.png')}}">
-                    </a>
-                </span>
-                <!-- mm hamburger -->
+                <!-- <a href="#intro" class="center scrollto header-image"> -->
+                <!--     <img src="{{url_for('static', filename='logo/logo.png')}}"> -->
+                <!-- </a> -->
+
+                {# large navbar #}
+                <div class="center-links">
+                    <ul id="large" style="text-align: center;" class="hide-on-med-and-down">
+                        {{ list_of_links() }}
+                    </ul>
+                </div>
+
+                {# mobile navbar #}
                 <a href="/" data-activates="mobile" class="right button-collapse">
-                    <i class="material-icons">
-                        menu
-                    </i>
+                    <i class="material-icons"> menu </i>
                 </a>
 
-                <!-- navbar hamburger -->
-                <ul class="side-nav" id="mobile">
-                    {{ list_of_links()}}
-                </ul>
-
-                <!-- navbar large -->
-                <ul id="large" class="right hide-on-med-and-down">
-                    {{ list_of_links() }}
-                </ul>
+                <ul class="side-nav" id="mobile"> {{ list_of_links()}} </ul>
             </div>
         </div>
     </nav>
 
-    <!-- intro -->
+    {# intro #}
     <div id="intro" class="parallax-container valign-wrapper fullscreen">
         <div class="parallax">
             <img alt="Phase Shift intro image"
@@ -141,7 +137,7 @@
         {% endfor %}
     {% endmacro %}
 
-    <!-- about -->
+    {# about #}
     <div id="about" class="row container center">
         <h3 class="grey-text text-darken-2"> About </h3>
         <p class="light flow-text"> {{html.about | safe}} </p>
@@ -161,7 +157,7 @@
     </div>
 
 
-    <!-- location -->
+    {# location #}
     <div id="location" class="row ">
         {{
         parallax_mini(url_for('static', filename="images/location.jpeg"),
@@ -186,7 +182,7 @@
     </div>
 
 
-    <!-- tickets -->
+    {# tickets #}
     <div id="tickets" class="row ">
 
         {{
@@ -216,7 +212,7 @@
         </div>
     </div>
 
-    <!-- faq -->
+    {# faq #}
     <div id="faq" class="row ">
         {{
         parallax_mini(url_for('static', filename='images/faq.jpeg'),
@@ -245,7 +241,7 @@
         </div>
     </div>
 
-    <!-- apply -->
+    {# apply #}
     <div id="apply" class="row ">
         {{
         parallax_mini(url_for('static', filename='images/apply.jpeg'),
@@ -266,7 +262,7 @@
         </div>
     </div>
 
-    <!-- contact -->
+    {# contact #}
     <div id="contact" class="center row section scrollspy container">
         <h3 class="grey-text darken-2"> Contact Us</h3>
 
@@ -324,7 +320,7 @@
     <li> <a href="http://instagram.com/phase.shift_official"> Instagram </a> </li>
     {% endmacro %}
 
-    <!-- footer -->
+    {# footer #}
     <footer class="page-footer grey lighten-2">
         <div class="container">
             <div class="row">
