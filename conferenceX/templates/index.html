@@ -325,33 +325,23 @@
         </div>
     </div>
 
-
-    {% macro social_media() %}
-    <li> <a href="https://twitter.com/_PhaseShift"> Facebook </a> </li>
-    <li> <a href="https://www.facebook.com/Phase-Shift-1633878273602288/"> Twitter </a> </li>
-    <li> <a href="http://instagram.com/phase.shift_official"> Instagram </a> </li>
-    {% endmacro %}
-
     {# footer #}
     <footer class="page-footer grey lighten-2">
-        <div class="container">
-            <div class="row">
-                <div class="col l6 s12">
-                    <h5 class="grey-text text-darken-2">Talk to us</h5>
-
-                    <ul>
-                        <li>
-                            <a href="mailto:contact@phaseshift.xyz"> contact@phaseshift.xyz </a>
-                        </li>
-                        {{social_media()}}
-                    </ul>
-                </div>
-                <div class="col l4 offset-l2 s12">
-                    <h5 class="grey-text text-darken-2">Links</h5>
-                    <ul>
-                        {{list_of_links()}}
-                    </ul>
-                </div>
+        <div class="container row">
+            <div class="col l6 s12">
+                <h5 class="grey-text text-darken-2">Talk to us</h5>
+                <ul>
+                <li> <a href="mailto:contact@phaseshift.xyz"> contact@phaseshift.xyz </a> </li>
+                <li> <a href="https://www.facebook.com/Phase-Shift-1633878273602288/"> Facebook </a> </li>
+                <li> <a href="https://twitter.com/_PhaseShift"> Twitter </a> </li>
+                <li> <a href="http://instagram.com/phase.shift_official"> Instagram </a> </li>
+                </ul>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="grey-text text-darken-2">Links</h5>
+                <ul>
+                    {{list_of_links()}}
+                </ul>
             </div>
         </div>
 
