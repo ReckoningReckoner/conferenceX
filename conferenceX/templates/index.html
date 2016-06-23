@@ -124,8 +124,7 @@
     <div id="Person-{{person.id}}" class="lightbox center row">
         <img alt="{{person.name}}"
              class="circle"
-             src={{person.url}}
-             height=30% >
+             src={{person.url}}>
         <h5> {{person.name}} </h5>
         <p> {{person.description}} </p>
     </div>
@@ -318,21 +317,24 @@
             </div>
         </div>
 
-        {% macro show_exec(name, full_name, title) %}
+        {% macro show_exec(name, full_name, title, email) %}
         <div class="col s6 m3">
             <img alt="{{name}}" class="circle featured-image"
                  src={{url_for('static', filename="images/" + name + ".jpg")}}>
              <h6 class="nowrap bold-title"> {{full_name}} </h6>
              <h6 class="nowrap"> {{title}} </h6>
+             <h5 class="nowrap">
+             <a href={{"mailto:"+email}}><i class="black-text icon-envelope"></i></a>
+             </h5>
         </div>
         {% endmacro %}
 
         <h5 class="light">Meet the team:</h5>
         <div class="row">
-            {{show_exec("gloria", "Gloria Li", "CEO and Lead Organizer")}}
-            {{show_exec("umna", "Umna Babar", "Business Analyst")}}
-            {{show_exec("sachin", "Sachin Khanna", "Marketing Director")}}
-            {{show_exec("viraj", "Viraj Bangari", "Web Developer")}}
+            {{show_exec("gloria", "Gloria Li", "CEO and Lead Organizer", "gloria@phaseshift.xyz")}}
+            {{show_exec("umna", "Umna Babar", "Business Analyst", "umna@phaseshift.xyz")}}
+            {{show_exec("sachin", "Sachin Khanna", "Marketing Director", "sachin@phaseshift.xyz")}}
+            {{show_exec("viraj", "Viraj Bangari", "Web Developer", "viraj@phaseshift.xyz")}}
         </div>
     </div>
 
