@@ -6,8 +6,8 @@
 <li> <a class="scrollto" href="#tickets"> Get tickets </a> </li>
 <li> <a class="scrollto" href="#faq"> FAQ </a> </li>
 <li> <a class="scrollto" href="#apply"> Apply as a speaker </a> </li>
+<li> <a class="scrollto" href="#sponsor">Sponsors</a> </li>
 <li> <a class="scrollto" href="#contact"> Contact Us </a> </li>
-<li> <a class="scrollto" href="https://slack-files.com/T17QDBH4K-F1KSJBB2S-7969689642"> For Sponsors</a> </li>
 {% endmacro %}
 
 
@@ -284,10 +284,37 @@
         </div>
     </div>
 
-    {# contact #}
-    <div id="contact" class="center row section scrollspy container">
-        <h3 class="grey-text darken-2"> Contact Us</h3>
+    {# sponsor #}
+    <div id="sponsor" class="row center section">
+        <h3 class="grey-text darken-2"> Sponsors</h3>
+        <div class="container ">
+            <p class="flow-text">
+                {{html.sponsor_text | safe}}
+                View our
+                <a class="flow-text" href="{{html.sponsor_url}}">
+                    sponorship presentation
+                </a> and talk to us at
+                <a href="mailto:sponsor@phaseshift.xyz">sponsor@phaseshift.xyz</a>
+            </p>
+            {% if sponsors|length > 0 %}
+            <h5 class="grey-text darken-2"> Our sponsors: </h5>
+            <div class="row">
+                {% for sponsor in sponsors %}
+                <div class="col s6">
+                    <a href="{{sponsor.website}}">
+                        <img class="sponsor-image" alt="{{sponsor.name}}"
+                        src="{{sponsor.url}}"></img>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
 
+    {# contact #}
+    <div id="contact" class="center row scrollspy container">
+        <h3 class="grey-text darken-2"> Contact Us</h3>
         <div class="row">
             <p class="flow-text">
                 Have any questions, concerns, or ideas? Feel free to

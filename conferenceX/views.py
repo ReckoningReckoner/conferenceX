@@ -1,5 +1,5 @@
 from conferenceX.flask_app import app, db
-from conferenceX.models import HTML, Person, Question, Price, User
+from conferenceX.models import HTML, Person, Question, Price, User, Sponsor
 from conferenceX.models import DATABASE_DICT
 from flask import render_template, session, redirect, url_for, request
 from flask import flash, abort
@@ -8,7 +8,7 @@ import json
 
 def get_table_from_str(table):
     """ Given a string table, return the corresponsind Table object """
-    new_table = DATABASE_DICT.get(table)
+    new_table = DATABASE_DICT.get(table.lower())
     if new_table is None:
         raise AttributeError("Invalid table name")
 
@@ -86,17 +86,27 @@ def admin():
 
             return json.dumps({'status': 'OK'}), 200
         except AttributeError as e:
-            return json.dumps({'error': str(e)}), 200
+            print(str(e))
+            return json.dumps({'status': str(e)}), 500
+
+    def get_all_from_table(table):
+        rows = table.query.all()
+        if len(rows) > 0:
+            return rows
+        return table()
 
     html = HTML.query.limit(1).all()
-    prices = Price.query.all()
-    persons = Person.query.all()
-    questions = Question.query.all()
+    prices = get_all_from_table(Price)
+    persons = get_all_from_table(Person)
+    questions = get_all_from_table(Question)
+    sponsors = get_all_from_table(Sponsor)
+
     return render_template("admin.html",
                            html=html,
                            prices=prices,
                            persons=persons,
-                           questions=questions)
+                           questions=questions,
+                           sponsors=sponsors)
 
 
 @app.route("/admin/add/<table>", methods=["GET", "POST"])
@@ -109,7 +119,8 @@ def add(table):
         return abort(403)
 
     try:
-        if table == "HTML":
+        table = table.lower()
+        if table == "html":
             raise AttributeError("Cannot edit HTML table")
 
         new_table = get_table_from_str(table)
@@ -167,7 +178,9 @@ def index():
     prices = Price.query.all()
     persons = Person.query.all()
     questions = Question.query.all()
+    sponsors = Sponsor.query.all()
 
     return render_template("index.html", html=html,
                            prices=prices, persons=persons,
-                           questions=questions)
+                           questions=questions,
+                           sponsors=sponsors)

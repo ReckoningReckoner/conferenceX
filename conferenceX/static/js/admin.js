@@ -29,6 +29,9 @@ $(document).ready(function() {
             data: JSON.stringify(row_to_json(event.target)),
             dataType: 'json',
             contentType: 'application/json',
+            error: function(data) { 
+                alert("There was an internal error");
+            }
         });
     });
 

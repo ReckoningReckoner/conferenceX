@@ -20,6 +20,8 @@ class HTML(db.Model):
     google_maps = db.Column(db.Text)
     about = db.Column(db.Text)
     apply_text = db.Column(db.Text)
+    sponsor_text = db.Column(db.Text)
+    sponsor_url = db.Column(db.Text)
 
     def __repr__(self):
         return "<HTML Table " + str(self.id) + ">"
@@ -40,6 +42,12 @@ class HTML(db.Model):
                      "value": self.google_maps})
         edit.append({"column": "apply_text", "label": "Apply Text",
                      "value": self.apply_text})
+
+        edit.append({"column": "sponsor_text", "label": "Sponsor Text",
+                     "value": self.sponsor_text})
+        edit.append({"column": "sponsor_url",
+                     "label": "Sponsor Presentation URL",
+                     "value": self.sponsor_url})
 
         edit.append({"column": "show_location",
                      "label": "Enable users to see location?",
@@ -157,5 +165,33 @@ class User(db.Model):
         return "<User " + self.username + ">"
 
 
-DATABASE_DICT = {"HTML": HTML, "Person": Person,
-                 "Question": Question, "Price": Price}
+class Sponsor(db.Model):
+    """ Sponsors """
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80))
+    url = db.Column(db.Text)
+    website = db.Column(db.Text)
+
+    def __init__(self, id=None, name="", url="", website="#void"):
+        self.id = id
+        self.name = name
+        self.url = url
+        self.website = website
+
+    def __repr__(self):
+        return "<Sponsor" + str("self.id") + " " + self.name + ">"
+
+    def edit_view(self):
+        edit = []
+        edit.append({"column": "name", "label": "Sponsor Name",
+                     "value": self.name})
+        edit.append({"column": "url", "label": "Logo URL",
+                     "value": self.url})
+        edit.append({"column": "website", "label": "Sponsor Website " +
+                     "(keep as #void if they don't provide a link)",
+                     "value": self.website})
+        return edit
+
+
+DATABASE_DICT = {"html": HTML, "person": Person,
+                 "question": Question, "price": Price, "sponsor": Sponsor}

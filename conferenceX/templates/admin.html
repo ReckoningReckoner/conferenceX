@@ -21,6 +21,14 @@
 </div>
 {%- endmacro %}
 
+{% macro add_row(name)%}
+    {% if name != "HTML" %}
+    <a class="btn" href="{{url_for('add', table=name)}}">
+        Add new {{name}}
+    </a>
+    {% endif %}
+{% endmacro %}
+
 {% macro edit_table(table, title) -%}
 <li>
     <div class="collapsible-header">
@@ -29,15 +37,14 @@
     </div>
     <div class="collapsible-body">
         <div class="container">
-            {% for row in table %}
-                {{edit_row(row)}}
-            {% endfor %}
-
-            {% if table[0].__class__.__name__ != "HTML" %}
-                <a class="btn" href="{{url_for('add', table=table[0].__class__.__name__)}}">
-                    Add new {{table[0].__class__.__name__}}
-                </a>
-            {% endif %}
+            {% if table is iterable %}
+                {% for row in table %}
+                    {{edit_row(row)}}
+                {% endfor %}
+                {{add_row(table[0].__class__.__name__)}}
+            {% else %}
+                {{add_row(table.__class__.__name__)}}
+            {%endif %}
         </div>
     </div>
 </li>
@@ -68,6 +75,7 @@
             {{edit_table(persons, "Edit Featured Speakers")}}
             {{edit_table(prices, "Edit Prices")}}
             {{edit_table(questions, "Edit FAQ")}}
+            {{edit_table(sponsors, "Edit Sponsors")}}
         </ul>
 
     </div>
