@@ -126,7 +126,7 @@
              class="circle"
              src={{person.url}}>
         <h5> {{person.name}} </h5>
-        <p> {{person.description}} </p>
+        <p class="left-align"> {{person.description | safe}} </p>
     </div>
     {% endmacro %}
 
