@@ -17,14 +17,13 @@ body {
    text-shadow: 0px 2px 8px #000000;
 }
 
-.sponsor-image{
+img.sponsor-image.featured-image{
     width: 80%;
     height: 30%;
     object-fit: contain;
-
 }
 
-.featured-image{
+img.featured-image{
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
     width: 88%;
@@ -65,7 +64,7 @@ body {
 
 @media only screen and (min-width: 601px) {
     .featherlight-content {
-        width: 42.79%;
+        width: 75%;
     }
 
     .row .col.push-m1\.5 {
