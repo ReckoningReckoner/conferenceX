@@ -5,6 +5,7 @@ import argparse
 import conferenceX.tests.dbtest as dbtest
 from conferenceX.tests.permissiontest import PermissionTest
 
+
 def run():
     """ runs testing script """
     parser = argparse.ArgumentParser(description="Do some tests")
