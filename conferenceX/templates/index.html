@@ -202,13 +202,18 @@
 
         <div class="center container">
             <div class="row">
-                <p class="flow-text"> Tickets are priced at </p>
+                {% if prices | length != 2 %}
+                    {% set width = "m" ~ 12//(prices|length) %}
+                {% else %}
+                    {% set width = "m3 push-m3"%}
+                {% endif %}
+
                 {% for price in prices %}
-                    <div class="col s12 m{{ 12//(prices|length) }}">
-                        <h5 class="grey-text text-darken-2"> {{price.name}} </h5>
-                        <h4> {{price.price}} </h4>
-                        <p class="grey-text text-darken-2"> {{price.description}} </p>
-                    </div>
+                <div class="col s12 {{width}}">
+                    <h5 class="grey-text text-darken-2"> {{price.name}} </h5>
+                    <h4> {{price.price}} </h4>
+                    <p class="grey-text text-darken-2"> {{price.description}} </p>
+                </div>
                 {% endfor %}
             </div>
             {% if html.show_ticket_button%}
