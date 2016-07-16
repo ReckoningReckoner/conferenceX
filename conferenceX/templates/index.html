@@ -105,7 +105,7 @@
             <div class="center row">
                 <a class="scrollto btn-large waves-effect waves-light grey darken-4"
                     href="#tickets">
-                    get tickets
+                    Pay what you want
                 </a>
             </div>
         </div>
@@ -154,7 +154,7 @@
 
         {% if html.show_program %}
             <h3 class="grey-text text-darken-2"> Program </h3>
-            <h5 class="grey-text"> Featured speakers</h5><hr>
+            <h5 class="grey-text"> Featured performers</h5><hr>
             {{show_all_persons(persons, 4)}}
 
             <div class="col s12 center">
@@ -202,36 +202,7 @@
 
         <div class="center container">
             <div class="row">
-                {% if prices | length != 2 %}
-                    {% set width = "m" ~ 12//(prices|length) %}
-                {% else %}
-                    {% set width = "m3 push-m3"%}
-                {% endif %}
-
-                {% for price in prices %}
-                <div class="col s12 {{width}}">
-                    <h5 class="grey-text text-darken-2"> {{price.name}} </h5>
-                    <h4> {{price.price}} </h4>
-                    <p class="grey-text text-darken-2"> {{price.description}} </p>
-                </div>
-                {% endfor %}
-            </div>
             {% if html.show_ticket_button%}
-                <a class="btn-large grey darken-4 waves-effect waves-light dropdown-button"
-                   href="https://www.tilt.com/users/gli79/organized"
-                   data-activates='ticket-types'>
-                    Buy Now
-                </a>
-
-                <ul id="ticket-types" class="dropdown-content">
-                    {% for price in prices %}
-                    <li>
-                        <a href="{{price.url}}" class="grey-text text-darken-4">
-                            {{price.name}}
-                        </a>
-                    </li>
-                    {% endfor %}
-                </ul>
             {% else %}
                 <a class="btn-large disabled"> Tickets coming soon </a>
             {% endif %}

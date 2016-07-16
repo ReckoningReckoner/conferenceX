@@ -1,5 +1,5 @@
 from conferenceX.flask_app import app, db
-from conferenceX.models import HTML, Person, Question, Price, User, Sponsor
+from conferenceX.models import HTML, Person, Question, User, Sponsor
 from conferenceX.models import DATABASE_DICT
 from flask import render_template, session, redirect, url_for, request
 from flask import flash, abort
@@ -96,14 +96,12 @@ def admin():
         return table()
 
     html = HTML.query.limit(1).all()
-    prices = get_all_from_table(Price)
     persons = get_all_from_table(Person)
     questions = get_all_from_table(Question)
     sponsors = get_all_from_table(Sponsor)
 
     return render_template("admin.html",
                            html=html,
-                           prices=prices,
                            persons=persons,
                            questions=questions,
                            sponsors=sponsors)
@@ -175,12 +173,11 @@ def index():
     """ The main page with the majority of content """
 
     html = HTML.query.limit(1).all()[0]
-    prices = Price.query.all()
     persons = Person.query.all()
     questions = Question.query.all()
     sponsors = Sponsor.query.all()
 
     return render_template("index.html", html=html,
-                           prices=prices, persons=persons,
+                           persons=persons,
                            questions=questions,
                            sponsors=sponsors)

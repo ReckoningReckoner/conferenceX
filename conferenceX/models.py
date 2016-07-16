@@ -194,4 +194,4 @@ class Sponsor(db.Model):
 
 
 DATABASE_DICT = {"html": HTML, "person": Person,
-                 "question": Question, "price": Price, "sponsor": Sponsor}
+                 "question": Question, "sponsor": Sponsor}
