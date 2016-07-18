@@ -20,6 +20,7 @@ class HTML(db.Model):
     google_maps = db.Column(db.Text)
     about = db.Column(db.Text)
     apply_text = db.Column(db.Text)
+    payment_msg = db.Column(db.Text)
     sponsor_text = db.Column(db.Text)
     sponsor_url = db.Column(db.Text)
 
@@ -40,6 +41,9 @@ class HTML(db.Model):
                      "value": self.location})
         edit.append({"column": "google_maps", "label": "Embedded Map HTML",
                      "value": self.google_maps})
+        edit.append({"column": "payment_msg", "label": "Payment Explanation",
+                     "value": self.payment_msg})
+
         edit.append({"column": "apply_text", "label": "Apply Text",
                      "value": self.apply_text})
 

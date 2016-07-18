@@ -104,7 +104,7 @@
 
             <div class="center row">
                 <a class="scrollto btn-large waves-effect waves-light grey darken-4"
-                    href="#tickets">
+                    href="https://www.tilt.com/tilts/phase-shift">
                     Pay what you want
                 </a>
             </div>
@@ -202,9 +202,13 @@
 
         <div class="center container">
             <div class="row">
-            {% if html.show_ticket_button%}
+                <p class="flow-text"> {{html.payment_msg|safe}} </p>
+            {% if html.show_ticket_button == True %}
+                <a class="btn-large grey darken-4 waves-effect waves-light"
+                    href="https://www.tilt.com/tilts/phase-shift"> 
+                    Pay what you want</a>
             {% else %}
-                <a class="btn-large disabled"> Tickets coming soon </a>
+                <a class="btn-large disabled"> Coming Soon </a>
             {% endif %}
         </div>
     </div>
