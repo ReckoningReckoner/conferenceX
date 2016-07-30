@@ -37,10 +37,12 @@ $(document).ready(function(){
 
     /* Fix scrolling when modals are opened */
     $.featherlight.defaults.afterOpen = function(event) {
+        $("body").css("position", "relative");
         $("body").css("overflow", "hidden");
     };
 
     $.featherlight.defaults.afterClose = function(event) {
+        $("body").css("position", "static");
         $("body").css("overflow", "scroll");
     };
 });
